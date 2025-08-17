@@ -18,6 +18,8 @@ The repository includes all essential mission files:
 - `cfgenvironment.xml`, `cfgweather.xml` — Environment & weather configuration.
 - `init.c` — Mission initialization logic.
 - `mapgroup*.xml` — Map group/cluster definitions.
+- `serverDZ.cfg` — Example server config file.
+- `start_antoria_server.bat` — Customisable server start script (Windows servers only).
 - Plus other supporting XML/JSON config files.
 
 ---
@@ -44,6 +46,16 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
    - Example:  
      ```
      DayZServer/mpmissions/empty.Antoria
+     ```
+   - (Optional)Place the `serverDZ.cfg` inside your server’s `root` directory.  
+   - Example:  
+     ```
+     C:/DayZServer/serverDZ.cfg
+     ```
+   - (Optional)Place the `start_antoria_server.bat` inside your server’s `root` directory and edit it.  
+   - Example:  
+     ```
+     C:/DayZServer/start_antoria_server.bat
      ```
 
 3. **Select the mission on server startup**  
