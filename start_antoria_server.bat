@@ -9,10 +9,11 @@ set serverLocation="C:\Path\To\DayZServer"
 set serverConfig=serverDZ.cfg
 set serverPort=2302
 set serverCPU=2
-set mods=@Antoria;@Antoria_Addons
 set checkInterval=60      :: Alive check interval in seconds
 set maxUptime=14400       :: Maximum runtime before restart (in seconds)
 set uptime=0
+set mods=@Antoria;@Antoria_Addons
+
 
 title %serverName% batch
 cd %serverLocation%
