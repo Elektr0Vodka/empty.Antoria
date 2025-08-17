@@ -45,6 +45,16 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
      ```
      DayZServer/mpmissions/empty.Antoria
      ```
+   - (Optional)Place the `serverDZ.cfg` inside your server’s `root` directory.  
+   - Example:  
+     ```
+     C:/DayZServer/serverDZ.cfg
+     ```
+   - (Optional)Place the `start_antoria_server.bat` inside your server’s `root` directory and edit it.  
+   - Example:  
+     ```
+     C:/DayZServer/start_antoria_server.bat
+     ```
 
 3. **Select the mission on server startup**  
    - In your server startup parameters, set:  
