@@ -86,9 +86,9 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 ---
 ---
 
-## ⚙️ Example `serverDZ.cfg` do not forget to change ports and passwords and other settings. Logging everything is on by default in this case.
+## ⚙️ Example `serverDZ.cfg` 
 
-Below is a sample `serverDZ.cfg` :
+Below is a sample `serverDZ.cfg` do not forget to change ports, passwords, viewdistance and other settings. Logging everything is on by default in this case.:
 
 ```cfg
 // ======================================================
