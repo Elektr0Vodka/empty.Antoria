@@ -72,7 +72,7 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 ## ⚖️ License & Attribution
 
 - **License**: _(Not specified — consider adding one, e.g., MIT or CC-BY)_  
-- **Attribution**: Antoria map by **Vlad**, with mission support by **MrCrumpet** and **Elektr0Vodka**.  
+- **Attribution**: Antoria map by **Vlad**, with mission support by **MrCrumpet** and  **Elektr0Vodka**.  
 
 ---
 

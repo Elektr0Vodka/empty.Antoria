@@ -1,0 +1,69 @@
+This is an older changelog, does not reflect the 23/11/24 changes - EV
+
+These files were built on the base of the mission files released by Vlad on — 13/10/2024 09:03
+Changes and Setup
+
+    Mission Folder Renamed
+    Renamed the mission folder to Empty.Antoria.
+    (Adjust the 'empty' part to match what you have set in your command line/serverDZ.cfg. Renaming this part does not affect functionality as this mission file does not include any #includes.)
+
+    CE Folder Split
+    Split and renamed the ce folders into antoria_ce and mods_ce.
+    Be careful not to overwrite your custom types! It's better to add your custom types file instead.
+
+    Added 1.26 Items to Types
+    The 1.26 items are added to types.xml. However, they are not spawning by default.
+    You need to manually select which items spawn and where, as I didn't want to interfere with custom types.
+    (For a full list, check the 1.26 added types.)
+	The new gamedev infected are added to the City infected entry.
+
+    New Spawns and Territories
+        Boat Spawns: Added.
+        Reindeer Territories: Added.
+        Hare Territories: Added based on existing hen territories.
+        Fox Territories: Added.
+
+    New Events
+        Police Van Events: Replaced vanilla police vehicles with police vans.
+        Police Van Event: Added spawnpoints near police stations and all roadblocks.
+
+    MapGroupProto Entries
+    Added by EV. (Still some misplaced, EV will get on it later)
+	
+	Land_Windmill.
+	Land_Chipper
+	Land_ind_house_1 
+	land_re4_house 
+	land_vlad_gas_station
+	land_russian_house 
+	Land_house_lim_2
+	Land_SK_farm_house
+	land_pitstone_windmill
+	land_shepards_view_barn
+	land_cottage1
+	land_small_barn
+	land_nissen_hut
+	Land_Sk_ThatchedCottage1
+	Land_Sk_ThatchedCottage2
+	Land_Sk_ThatchedCottage3
+	Land_Sk_ThatchedCottage4
+	Land_Sk_ThatchedCottage5
+	Land_Sk_ThatchedCottage8
+	flip_destroyed_bus
+(And more)
+
+    Fixed Economy and Init.c
+        Fixed issues with cfgeconomycore.xml entries.
+        Updated Init.c to override PlayerBase CreateCharacter, so players spawn with the character selected in the main menu rather than a random one.
+
+Character Selection Guide
+
+To spawn with your selected character, follow these steps:
+
+    For New Characters
+        Before connecting for the first time, create your desired character in the main menu.
+        Connect to the server through the in-game browser.
+
+    For Existing Characters
+        If you have an existing character, you'll need to die (either get killed or commit suicide).
+        Disconnect to the main menu, select and customize your new character, then reconnect to the server to spawn with the new character.
