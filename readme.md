@@ -55,7 +55,7 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 4. **Adjust settings (optional)**  
    - Edit the included XML/JSON files to customize:  
      - **Vanilla Loot & economy** (`cfgeconomycore.xml`,`types.xml`, `cfgspawnabletypes.xml`)  
-     - **Antoria custom Loot** (`xml files in Antoria_ce folder`)  
+     - **Antoria custom Loot** (`xml files in empty.Antoria/antoria_ce folder`)  
      - **Events & spawns** (`cfgeventgroups.xml`, `cfgeventspawns.xml`)  
      - **Weather & environment** (`cfgweather.xml`, `cfgenvironment.xml`)  
      - **Player spawns** (`cfgplayerspawnpoints.xml`)  
