@@ -88,26 +88,27 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 
 ## ⚙️ Example `serverDZ.cfg`
 
-Below is a sample `serverDZ.cfg` that adheres closely to the official DayZ configuration standards:
+Below is a sample `serverDZ.cfg` :
 
 ```cfg
-hostname = "Antoria Server";             // Server name displayed in server browser
+hostname = "My Antoria Server";             // Server name displayed in server browser
 password = "";                           // Empty = no join password
-passwordAdmin = "changeme";              // Admin password – replace with a secure one
-maxPlayers = 60;                         // Maximum number of players allowed
+passwordAdmin = "changeme123";              // Admin password – replace with a secure one
+maxPlayers = 64;                         // Maximum number of players allowed
 
 verifySignatures = 2;                    // Full signature verification
 forceSameBuild = 1;                      // Restrict to same game build
 
 disableVoN = 0;                          // Enable voice
-vonCodecQuality = 20;                    // Voice quality (0–30)
+vonCodecQuality = 30;                    // Voice quality (0–30)
 
 disable3rdPerson = 0;                    // Allow 3rd-person view
 disableCrosshair = 0;                    // Allow crosshair
 
-serverTime = "SystemTime";               // Server uses system time
-serverTimeAcceleration = 1;              // Day/night cycle: real-time
-serverNightTimeAcceleration = 12;        // Speed up night cycle
+serverTime = "2025/8/17/6/00";			// Initial in-game time of the server. "SystemTime" means the local time of the machine.
+									      // Another possibility is to set the time to some value in "YYYY/MM/DD/HH/MM" format, e.g "2015/4/8/17/23".
+serverTimeAcceleration = 4;              // Day/night cycle: real-time
+serverNightTimeAcceleration = 3;        // Speed up night cycle
 
 loginQueueConcurrentPlayers = 5;         // Players processed at once during login
 loginQueueMaxPlayers = 500;              // Maximum in queue
@@ -115,10 +116,10 @@ loginQueueMaxPlayers = 500;              // Maximum in queue
 instanceId = 1;                          // Unique server instance ID
 
 motd[] = {
-    "Welcome to the empty.Antoria Server!",
+    "Welcome to the our Antoria Server!",
     "Join our Discord for support: discord.gg/yPwsWmB9rr"
 };
-motdInterval = 30;                       // Message interval in seconds
+motdInterval = 1800;                       // Message interval in seconds
 
 logFile = "server_console.log";          // Console log file
 
@@ -129,4 +130,6 @@ class Missions {
         template = "empty.Antoria";      // Mission to run
     };
 }
+```
+
 🚀 *Deploy Antoria and enjoy a fresh DayZ experience!*
