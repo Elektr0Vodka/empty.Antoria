@@ -18,6 +18,8 @@ The repository includes all essential mission files:
 - `cfgenvironment.xml`, `cfgweather.xml` — Environment & weather configuration.
 - `init.c` — Mission initialization logic.
 - `mapgroup*.xml` — Map group/cluster definitions.
+- `serverDZ.cfg` — Example server config file.
+- `start_antoria_server.bat` — Customisable server start script (Windows servers only).
 - Plus other supporting XML/JSON config files.
 
 ---
