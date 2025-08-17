@@ -86,99 +86,128 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 ---
 ---
 
-## ⚙️ Example `serverDZ.cfg`
+## ⚙️ Example `serverDZ.cfg` do not forget to change ports and passwords and other settings. Logging everything is on by default in this case.
 
 Below is a sample `serverDZ.cfg` :
 
 ```cfg
-hostname = "My Antoria Server";             // Server name displayed in server browser
-password = "";                           // Empty = no join password
-passwordAdmin = "changeme123";              // Admin password – replace with a secure one
-maxPlayers = 64;                         // Maximum number of players allowed
+// ======================================================
+// Basic server settings
+// ======================================================
+hostname = "My Antoria Server";     // Server name displayed in server browser
+password = "";                      // Empty = no join password
+passwordAdmin = "changeme123";      // Admin password – replace with a secure one
+maxPlayers = 64;                    // Maximum number of players allowed
+verifySignatures = 2;               // Full signature verification
+forceSameBuild = 1;                 // Restrict to same game build
 
-verifySignatures = 2;                    // Full signature verification
-forceSameBuild = 1;                      // Restrict to same game build
+// ======================================================
+// Voice / Camera settings
+// ======================================================
+disableVoN = 0;                     // Enable voice
+vonCodecQuality = 30;               // Voice quality (0–30)
+disable3rdPerson = 0;               // Allow 3rd-person view
+disableCrosshair = 0;               // Allow crosshair
 
-disableVoN = 0;                          // Enable voice
-vonCodecQuality = 30;                    // Voice quality (0–30)
+// ======================================================
+// Time & date settings
+// ======================================================
+serverTime = "2025/8/17/6/00";      // Initial in-game time (or use "SystemTime")
+serverTimeAcceleration = 4;         // Time acceleration (day)
+serverNightTimeAcceleration = 3;    // Time acceleration (night)
 
-disable3rdPerson = 0;                    // Allow 3rd-person view
-disableCrosshair = 0;                    // Allow crosshair
+// ======================================================
+// Queue & instance settings
+// ======================================================
+loginQueueConcurrentPlayers = 5;    // Players processed at once during login
+loginQueueMaxPlayers = 500;         // Maximum in queue
+instanceId = 1;                     // Unique server instance ID
 
-serverTime = "2025/8/17/6/00";			// Initial in-game time of the server. "SystemTime" means the local time of the machine.
-									      // Another possibility is to set the time to some value in "YYYY/MM/DD/HH/MM" format, e.g "2015/4/8/17/23".
-serverTimeAcceleration = 4;              // Day/night cycle: real-time
-serverNightTimeAcceleration = 3;        // Speed up night cycle
-
-loginQueueConcurrentPlayers = 5;         // Players processed at once during login
-loginQueueMaxPlayers = 500;              // Maximum in queue
-
-instanceId = 1;                          // Unique server instance ID
-
+// ======================================================
+// Messages of the day
+// ======================================================
 motd[] = {
-    "Welcome to the our Antoria Server!",
+    "Welcome to our Antoria Server!",
     "Join our Discord for support: discord.gg/yPwsWmB9rr"
 };
-motdInterval = 1800;                       // Message interval in seconds
+motdInterval = 1800;                 // Message interval in seconds
 
-logFile = "server_console.log";          // Console log file
+// ======================================================
+// Logs
+// ======================================================
+logFile = "server_console.log";      // Console log file
+timeStampFormat = "Short";           // Format for .rpt log timestamps (Full/Short)
+logAverageFps = 10;                  // Interval (sec) for average server FPS logging
+logMemory = 1;                       // Interval (sec) for memory usage logging
+logPlayers = 1;                      // Interval (sec) for connected players logging
 
-BattlEye = 1;                            // Enable BattlEye anti-cheat
+// ======================================================
+// Admin logs
+// ======================================================
+adminLogPlayerHitsOnly = 0;          // 1 = only log player hits / 0 = log all hits
+adminLogPlacement = 1;               // Log placement actions (traps, tents, etc.)
+adminLogBuildActions = 1;            // Log basebuilding actions
+adminLogPlayerList = 1;              // Periodic player list with position (every 5 min)
 
+// ======================================================
+// Performance settings
+// ======================================================
+simulatedPlayersBatch = 20;          // Limit of players simulated per frame
+multithreadedReplication = 1;        // Enables multi-threaded replication
+speedhackDetection = 1;              // Enable speedhack detection (1–10)
+
+// ======================================================
+// Network bubble / bandwidth
+// ======================================================
+networkRangeClose = 20;              // Bubble: close objects
+networkRangeNear = 150;              // Bubble: near inventory items
+networkRangeFar = 1000;              // Bubble: far objects
+networkRangeDistantEffect = 4000;    // Bubble: effects (sound, etc.)
+
+networkObjectBatchLogSlow = 5;
+networkObjectBatchEnforceBandwidthLimits = 1;
+networkObjectBatchUseEstimatedBandwidth = 0;
+networkObjectBatchUseDynamicMaximumBandwidth = 1;
+networkObjectBatchBandwidthLimit = 0.8;
+networkObjectBatchCompute = 1000;
+networkObjectBatchSendCreate = 10;
+networkObjectBatchSendDelete = 10;
+
+// ======================================================
+// Rendering & lighting
+// ======================================================
+defaultVisibility = 1375;            // Max terrain render distance
+defaultObjectViewDistance = 1375;    // Max object render distance
+lightingConfig = 2;                  // 0=bright, 1=dark, 2=Sakhal
+disablePersonalLight = 1;            // Disable personal light for clients
+
+// ======================================================
+// Gameplay toggles
+// ======================================================
+disableBaseDamage = 0;               // 1 = disable fence/watchtower damage
+disableContainerDamage = 0;          // 1 = disable tent/container damage
+disableRespawnDialog = 0;            // 1 = disable respawn dialog
+
+// ======================================================
+// Connection / ping / FPS safety
+// ======================================================
+pingWarning = 200;                   // Ping warning threshold (yellow)
+pingCritical = 250;                  // Ping warning threshold (red)
+MaxPing = 300;                       // Kick players above this ping
+serverFpsWarning = 15;               // Warn if server FPS drops below this
+
+shotValidation = 1;                  // Enable shot validation
+clientPort = 2304;                   // Client connection port
+BattlEye = 1;                        // Enable BattlEye
+
+// ======================================================
+// Missions
+// ======================================================
 class Missions {
     class DayZ {
-        template = "empty.Antoria";      // Mission to run
+        template = "empty.Antoria";  // Mission to run
     };
 }
-
-timeStampFormat = "Short";		// Format for timestamps in the .rpt file (value Full/Short)
-logAverageFps = 10;				// Logs the average server FPS (value in seconds), needs to have ''-doLogs'' launch parameter active
-logMemory = 1;					// Logs the server memory usage (value in seconds), needs to have the ''-doLogs'' launch parameter active
-logPlayers = 1;					// Logs the count of currently connected players (value in seconds), needs to have the ''-doLogs'' launch parameter active
-logFile = "server_console.log";	// Saves the server console log to a file in the folder with the other server logs
-
-adminLogPlayerHitsOnly = 0;		// 1 - log player hits only / 0 - log all hits ( animals/infected )
-adminLogPlacement = 1;			// 1 - log placement action ( traps, tents )
-adminLogBuildActions = 1;		// 1 - log basebuilding actions ( build, dismantle, destroy )
-adminLogPlayerList = 1;			// 1 - log periodic player list with position every 5 minutes
-
-simulatedPlayersBatch = 20;		// Set limit of how much players can be simulated per frame (for server performance gain)
-
-multithreadedReplication = 1;	// enables multi-threaded processing of server's replication system
-								// number of worker threads is derived by settings of jobsystem in dayzSettings.xml by "maxcores" and "reservedcores" parameters (value 0-1)
-speedhackDetection = 1;			// enable speedhack detection, values 1-10 (1 strict, 10 benevolent, can be float)
-
-networkRangeClose = 20;			// network bubble distance for spawn of close objects with items in them (f.i. backpacks), set in meters, default value if not set is 20
-networkRangeNear = 150;			// network bubble distance for spawn (despawn +10%) of near inventory items objects, set in meters, default value if not set is 150
-networkRangeFar = 1000;			// network bubble distance for spawn (despawn +10%) of far objects (other than inventory items), set in meters, default value if not set is 1000
-networkRangeDistantEffect = 4000;		// network bubble distance for spawn of effects (currently only sound effects), set in meters, default value if not set is 4000
-networkObjectBatchLogSlow = 5;	//Maximum time a bubble can take to iterate in seconds before it is logged to the console
-networkObjectBatchEnforceBandwidthLimits = 1;	//Enables a limiter for object creation based on bandwidth statistics
-networkObjectBatchUseEstimatedBandwidth = 0;	//Switch between the method behind finding the bandwidth usage of a connection. If set to 0, it will use the total of the actual data sent since the last server frame, and if set to 1, it will use a crude estimation
-networkObjectBatchUseDynamicMaximumBandwidth = 1;	//Determines if the bandwidth limit should be a factor of the maximum bandwidth that can be sent or a hard limit. The maximum bandwidth that can be sent fluctuates depending on demand in the system.
-networkObjectBatchBandwidthLimit = 0.8;		//The actual limit, could be a [0,1] value or a [1,inf] value depending on networkObjectBatchUseDynamicMaximumBandwidth. See above
-networkObjectBatchCompute = 1000;	//Number of objects in the create/destroy lists that are checked in a single server frame
-networkObjectBatchSendCreate = 10;	//Maximum number of objects that can be sent for creation
-networkObjectBatchSendDelete = 10;	//Maximum number of objects that can be sent for deletion
-
-
-
-defaultVisibility=1375;			// highest terrain render distance on server (if higher than "viewDistance=" in DayZ client profile, clientside parameter applies)
-defaultObjectViewDistance=1375;	// highest object render distance on server (if higher than "preferredObjectViewDistance=" in DayZ client profile, clientside parameter applies)
-lightingConfig = 2;				// 0 for brighter night, 1 for darker night, 2 for Sakhal-specific lighting - if enableCfgGameplayFile is enabled, this option will be overriden by the WorldsData::lightingConfig value
-disablePersonalLight = 1;		// disables personal light for all clients connected to server
-
-disableBaseDamage = 0;			// set to 1 to disable damage/destruction of fence and watchtower
-disableContainerDamage = 0;		// set to 1 to disable damage/destruction of tents, barrels, wooden crate and seachest
-disableRespawnDialog = 0;		// set to 1 to disable the respawn dialog (new characters will be spawning as random)
-
-pingWarning = 200;				// set to define the ping value from which the initial yellow ping warning is triggered (value in milliseconds)
-pingCritical = 250;				// set to define the ping value from which the red ping warning is triggered (value in milliseconds)
-MaxPing = 300;					// set to define the ping value from which a player is kicked from the server (value in milliseconds)
-serverFpsWarning = 15;			// set to define the server fps value under which the initial server fps warning is triggered (minimum value is 11)
-
-shotValidation = 1;				// 1 enables the validation, 0 disables
-clientPort = 2304;              // int value, forces the port the clients connect with
 ```
 
 🚀 *Deploy Antoria and enjoy a fresh DayZ experience!*
