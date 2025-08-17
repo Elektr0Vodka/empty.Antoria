@@ -50,7 +50,7 @@
 		<file name="antoria_spawnabletypes.xml" type="spawnabletypes"/>
 	</ce>
 	<!-- Mod CE All mod types go in this folder -->
-	<ce folder="mod_ce">
+	<ce folder="mods_ce">
 		<file name="horse_types.xml" type="types"/>
 		<file name="sherpa_types.xml" type="types"/>
 		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>

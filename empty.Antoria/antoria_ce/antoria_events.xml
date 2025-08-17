@@ -89,8 +89,8 @@
 		<limit>custom</limit>
 		<active>1</active>
 		<children>
-			<child lootmax="0" lootmin="0" max="1" min="1" type="Animal_UrsusMaritimus2"/>
 			<child lootmax="0" lootmin="0" max="1" min="1" type="Animal_UrsusMaritimus"/>
+			<child lootmax="0" lootmin="0" max="2" min="0" type="Animal_UrsusMaritimus_cub"/>
 		</children>
 	</event>
 </events>
