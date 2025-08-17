@@ -80,7 +80,7 @@ It is designed to be dropped directly into a DayZ server to run the Antoria map.
 ## 📬 Contact & Community
 
 - 📢 Join our community on Discord: [https://discord.gg/yPwsWmB9rr](https://discord.gg/yPwsWmB9rr)  
-- 💬 Open an issue on [GitHub](https://github.com/Elektr0Vodka/empty.Antoria/issues) for support or bug reports.  
+- 💬 Open an issue on [GitHub](https://github.com/Elektr0Vodka/empty.Antoria/issues) or join Discord for support or bug reports.  
 - 🙏 Contributions and improvements are welcome!  
 
 ---
