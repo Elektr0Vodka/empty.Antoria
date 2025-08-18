@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<events>
+	<!-- Horses modded -->
+<event name="AnimalWildHorse">
+        <nominal>10</nominal>
+        <min>4</min>
+        <max>9</max>
+        <lifetime>180</lifetime>
+        <restock>0</restock>
+        <saferadius>250</saferadius>
+        <distanceradius>500</distanceradius>
+        <cleanupradius>600</cleanupradius>
+        <flags deletable="0" init_random="0" remove_damaged="1"/>
+        <position>fixed</position>
+        <limit>child</limit>
+        <active>1</active>
+        <children>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_Brown"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_White"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_Gray"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_Gray2"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_Palomino"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_Black"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_BlackWhiteSpot"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="Animal_Horse_BrownWhite"/>
+        </children>
+    </event>
+	
+	<!-- Vehicles modded -->
+	<!-- Savage Snowmobiles Start -->
+    <event name="VehicleSnowmobiles">
+        <nominal>8</nominal>
+        <min>6</min>
+        <max>8</max>
+        <lifetime>300</lifetime>
+		<restock>0</restock>
+		<saferadius>500</saferadius>
+		<distanceradius>500</distanceradius>
+		<cleanupradius>200</cleanupradius>
+        <flags deletable="0" init_random="0" remove_damaged="1" sec_spawner="0"/>
+        <position>fixed</position>
+        <limit>mixed</limit>
+        <active>0</active>
+        <children>
+
+            <!-- Sherpa Standard Variants Start -->
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Black"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Blue"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Brown"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Green"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Mint"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Pink"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Purple"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Red"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Savage"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Yellow"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_White"/>
+            <!-- Sherpa Standard Variants End -->
+
+            <!-- Sherpa Cargo Variants Start -->
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Cargo"/>
+            <!-- Sherpa Cargo Variants End -->
+
+            <!-- Sherpa Sport Variants Start -->
+            <child lootmax="0" lootmin="0" max="1" min="1" type="SavageSherpa_Sport_Black"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_Blue"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_Red"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_DeepRed"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_Pink"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_Purple"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_White"/>
+            <child lootmax="0" lootmin="0" max="1" min="0" type="SavageSherpa_Sport_DiamondCut"/>
+            <!-- Sherpa Sport Variants End -->
+
+        </children>
+    </event>
+</events>
