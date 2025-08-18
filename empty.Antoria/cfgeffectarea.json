@@ -5,13 +5,9 @@
       "Type": "ContaminatedArea_Static",
       "TriggerType": "ContaminatedTrigger",
       "Data": {
-        "Pos": [
-          12247,
-          0,
-          5638
-        ],
-        "Radius": 180,
-        "PosHeight": 25,
+        "Pos": [12247, 0, 5638],
+        "Radius": 250,
+        "PosHeight": 30,
         "NegHeight": 50,
         "InnerRingCount": 2,
         "InnerPartDist": 50,
@@ -29,17 +25,109 @@
       }
     },
     {
+      "AreaName": "wds1",
+      "Type": "ContaminatedArea_Static",
+      "TriggerType": "ContaminatedTrigger",
+      "Data": {
+        "Pos": [1304, 0, 6559],
+        "Radius": 220,
+        "PosHeight": 70,
+        "NegHeight": 100,
+        "InnerRingCount": 2,
+        "InnerPartDist": 50,
+        "OuterRingToggle": 1,
+        "OuterPartDist": 40,
+        "OuterOffset": 0,
+        "VerticalLayers": 0,
+        "VerticalOffset": 0,
+        "ParticleName": "graphics/particles/contaminated_area_gas_bigass"
+      },
+      "PlayerData": {
+        "AroundPartName": "graphics/particles/contaminated_area_gas_around",
+        "TinyPartName": "graphics/particles/contaminated_area_gas_around_tiny",
+        "PPERequesterType": "PPERequester_ContaminatedAreaTint"
+      }
+    },
+    {
+      "AreaName": "wds2",
+      "Type": "ContaminatedArea_Static",
+      "TriggerType": "ContaminatedTrigger",
+      "Data": {
+        "Pos": [1863, 0, 6741],
+        "Radius": 250,
+        "PosHeight": 80,
+        "NegHeight": 150,
+        "InnerRingCount": 2,
+        "InnerPartDist": 50,
+        "OuterRingToggle": 1,
+        "OuterPartDist": 40,
+        "OuterOffset": 0,
+        "VerticalLayers": 0,
+        "VerticalOffset": 0,
+        "ParticleName": "graphics/particles/contaminated_area_gas_bigass"
+      },
+      "PlayerData": {
+        "AroundPartName": "graphics/particles/contaminated_area_gas_around",
+        "TinyPartName": "graphics/particles/contaminated_area_gas_around_tiny",
+        "PPERequesterType": "PPERequester_ContaminatedAreaTint"
+      }
+    },
+    {
+      "AreaName": "wds3",
+      "Type": "ContaminatedArea_Static",
+      "TriggerType": "ContaminatedTrigger",
+      "Data": {
+        "Pos": [1662, 50, 6640],
+        "Radius": 250,
+        "PosHeight": 80,
+        "NegHeight": 150,
+        "InnerRingCount": 2,
+        "InnerPartDist": 50,
+        "OuterRingToggle": 1,
+        "OuterPartDist": 40,
+        "OuterOffset": 0,
+        "VerticalLayers": 0,
+        "VerticalOffset": 0,
+        "ParticleName": "graphics/particles/contaminated_area_gas_bigass"
+      },
+      "PlayerData": {
+        "AroundPartName": "graphics/particles/contaminated_area_gas_around",
+        "TinyPartName": "graphics/particles/contaminated_area_gas_around_tiny",
+        "PPERequesterType": "PPERequester_ContaminatedAreaTint"
+      }
+    },
+    {
+      "AreaName": "wds4",
+      "Type": "ContaminatedArea_Static",
+      "TriggerType": "ContaminatedTrigger",
+      "Data": {
+        "Pos": [1651, 90, 6627],
+        "Radius": 270,
+        "PosHeight": 80,
+        "NegHeight": 150,
+        "InnerRingCount": 2,
+        "InnerPartDist": 50,
+        "OuterRingToggle": 1,
+        "OuterPartDist": 40,
+        "OuterOffset": 0,
+        "VerticalLayers": 0,
+        "VerticalOffset": 0,
+        "ParticleName": "graphics/particles/contaminated_area_gas_bigass"
+      },
+      "PlayerData": {
+        "AroundPartName": "graphics/particles/contaminated_area_gas_around",
+        "TinyPartName": "graphics/particles/contaminated_area_gas_around_tiny",
+        "PPERequesterType": "PPERequester_ContaminatedAreaTint"
+      }
+    },            
+    {
       "AreaName": "sector12",
       "Type": "ContaminatedArea_Static",
       "TriggerType": "ContaminatedTrigger",
       "Data": {
-        "Pos": [
-          16243,
-          0,
-          16554
-        ],
-        "Radius": 180,
-        "PosHeight": 25,
+        "Pos": [16243, 0, 16554],
+        "Radius": 450,
+        "PosHeight": 150,
         "NegHeight": 50,
         "InnerRingCount": 2,
         "InnerPartDist": 50,
@@ -61,11 +149,7 @@
       "Type": "ContaminatedArea_Static",
       "TriggerType": "ContaminatedTrigger",
       "Data": {
-        "Pos": [
-          9534,
-          0,
-          9787
-        ],
+        "Pos": [9534, 0, 9787],
         "Radius": 180,
         "PosHeight": 25,
         "NegHeight": 50,
@@ -86,9 +170,9 @@
     }
   ],
   "SafePositions": [
-    [
-      12481.490234,
-      5878.623535
-    ]
+    [12481.490234, 5878.623535],
+    [1535.949219, 6364.827637], 
+    [9488.027344, 9591.181641],
+    [2382.049805, 6776.936523]
   ]
 }

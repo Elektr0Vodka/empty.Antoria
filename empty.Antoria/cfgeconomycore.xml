@@ -19,6 +19,7 @@
 		<!-- boats -->
 	</classes>
 	<defaults>
+		<default name="clear_loot" value="false"/>
 		<default name="dyn_radius" value="30"/>
 		<default name="dyn_smin" value="0"/>
 		<default name="dyn_smax" value="0"/>
@@ -50,11 +51,6 @@
 		<file name="antoria_spawnabletypes.xml" type="spawnabletypes"/>
 	</ce>
 	<!-- Mod CE All mod types go in this folder -->
-	<ce folder="mods_ce">
-		<file name="horse_types.xml" type="types"/>
-		<file name="sherpa_types.xml" type="types"/>
-		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>
-		
-		<file name="mod_events.xml" type="events"/>
+	<ce folder="mod_ce">
 	</ce> 
 </economycore>

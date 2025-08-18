@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <spawnabletypes>
 	<!-- VLAD_Exoskeleton -->
-	<type name="VLAD_Exoskeleton">
+	<type name="Titan_Exosuit">
 		<!-- change this for the items to spawn with random health -->
 		<damage min="0.0" max="0.0"/>
 			<!-- change this when you want to lower the attachment chance -->
 		<attachments chance="1.00">
 			<!-- change this when you want to lower the specific item chance -->
-			<item name="VLAD_Bag" chance="0.0"/>
+			<item name="Titan_Bag" chance="0.0"/>
 		</attachments>
 			<!-- change this when you want to lower the attachment chance -->
 		<attachments chance="1.00">
 			<!-- change this when you want to lower the specific item chance -->
-			<item name="VLAD_Battery" chance="0.0"/>
+			<item name="Titan_Battery" chance="0.0"/>
 		</attachments>
 	</type>
-	
+	<type name="packboy">
+		<cargo chance="0.10">
+	        	<item name="Antoria_KeyCard" chance="1.0" />
+		</cargo>
+	</type>
 	<type name="ZmbM_SkaterYoung_Blue_kid">
 		<cargo preset="foodCity" />
 		<cargo preset="toolsCity" />

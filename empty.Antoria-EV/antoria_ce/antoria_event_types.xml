@@ -1,0 +1,16 @@
+<types>
+	<!-- Police van wreck -->
+	<type name="Land_Vaux_Policedvan_1">
+		<nominal>0</nominal>
+		<lifetime>3</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<child lootmax="5" lootmin="3" max="6" min="2" type="Land_Wreck_hb01_aban1_police"/>
+		<child lootmax="5" lootmin="3" max="6" min="2" type="Land_Wreck_hb01_aban2_police"/>
+		<child lootmax="5" lootmin="3" max="6" min="2" type="Land_Vaux_Policedvan_1"/>
+	</type>
+	<!-- Police van wreck -->
+</types>

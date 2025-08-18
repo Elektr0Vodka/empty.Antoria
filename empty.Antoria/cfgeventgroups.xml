@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <eventgroupdef>
+<!-- StaticAirplaneCrateBN1 Group -->
+<group name="StaticAirplaneCrateBN1">
+    <child type="StaticObj_Misc_SupplyBox2_DE" deloot="0" lootmin="4" lootmax="4" x="0" z="0" a="0" y="0.0"/>
+</group>
+
+    <!-- Group for base MilitaryCase (not strictly needed since event spawns it directly) -->
+    <group name="ItemCrumpet_Endgame_Barrel">
+        <child type="Crumpet_Barrel_Red_Loot" deloot="0" lootmax="20" lootmin="8" x="0" z="0" a="0" y="0.0"/>
+    </group>
+    <!-- Groups for each variant crate -->
+    <group name="ItemCrumpet_WDS_Barrel">
+        <child type="Crumpet_Barrel_Red_Loot" deloot="0" lootmax="20" lootmin="8" x="0" z="0" a="0" y="0.0"/>
+    </group>
+
+    <group name="ItemCrumpet_Bunker_Barrel">
+        <child type="Crumpet_Barrel_Red_Loot" deloot="0" lootmax="20" lootmin="8" x="0" z="0" a="0" y="0.0"/>
+    </group>
+    
+
 <!--<pos x="16626.7" z="2468.86" a="0" y="152.268" /> group="Train_Abandoned_Midway"/-->
 <group name="Train_Abandoned_Midway">
     <!-- This is the reference point with original coordinates mentioned in the comment above, make sure the X and Z coordinates for the parent object are 0 here. -->

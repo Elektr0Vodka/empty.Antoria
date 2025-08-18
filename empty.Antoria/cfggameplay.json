@@ -1,5 +1,5 @@
 {
-  "version": 122,
+  "version": 123,
   "GeneralData": {
     "disableBaseDamage": false,
     "disableContainerDamage": false,
@@ -9,21 +9,21 @@
   "PlayerData": {
     "disablePersonalLight": false,
     "StaminaData": {
-      "sprintStaminaModifierErc": 1,
-      "sprintStaminaModifierCro": 1,
-      "staminaWeightLimitThreshold": 6000,
-      "staminaMax": 100,
+      "sprintStaminaModifierErc": 1.0,
+      "sprintStaminaModifierCro": 1.0,
+      "staminaWeightLimitThreshold": 6000.0,
+      "staminaMax": 100.0,
       "staminaKgToStaminaPercentPenalty": 1.75,
-      "staminaMinCap": 5,
-      "sprintSwimmingStaminaModifier": 1,
-      "sprintLadderStaminaModifier": 1,
-      "meleeStaminaModifier": 1,
-      "obstacleTraversalStaminaModifier": 1,
-      "holdBreathStaminaModifier": 1
+      "staminaMinCap": 5.0,
+      "sprintSwimmingStaminaModifier": 1.0,
+      "sprintLadderStaminaModifier": 1.0,
+      "meleeStaminaModifier": 1.0,
+      "obstacleTraversalStaminaModifier": 1.0,
+      "holdBreathStaminaModifier": 1.0
     },
     "ShockHandlingData": {
-      "shockRefillSpeedConscious": 5,
-      "shockRefillSpeedUnconscious": 1,
+      "shockRefillSpeedConscious": 5.0,
+      "shockRefillSpeedUnconscious": 1.0,
       "allowRefillSpeedModifier": true
     },
     "MovementData": {
@@ -35,10 +35,15 @@
       "allowStaminaAffectInertia": true
     },
     "DrowningData": {
-      "staminaDepletionSpeed": 10,
-      "healthDepletionSpeed": 10,
-      "shockDepletionSpeed": 10
-    }
+      "staminaDepletionSpeed": 10.0,
+      "healthDepletionSpeed": 10.0,
+      "shockDepletionSpeed": 10.0
+    },
+		"WeaponObstructionData":
+		{
+			"staticMode": 1,
+			"dynamicMode": 1
+		}
   },
   	"WorldsData":
 	{
@@ -46,30 +51,33 @@
 		"objectSpawnersArr": [],
 		"environmentMinTemps": [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"environmentMaxTemps": [10, 11, 12, 13, 14, 15, 16, 17, 10, 10, 10, 10],
-		"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0]
+		"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0],
+                "playerRestrictedAreaFiles": ["pra/warheadstorage.json"]
 	},
-  "BaseBuildingData": {
+   "BaseBuildingData": {
     "HologramData": {
-      "disableIsCollidingBBoxCheck": false,
+      "disableIsCollidingBBoxCheck": true,
       "disableIsCollidingPlayerCheck": false,
-      "disableIsClippingRoofCheck": false,
-      "disableIsBaseViableCheck": false,
-      "disableIsCollidingGPlotCheck": false,
+      "disableIsClippingRoofCheck": true,
+      "disableIsBaseViableCheck": true,
+      "disableIsCollidingGPlotCheck": true,
       "disableIsCollidingAngleCheck": false,
       "disableIsPlacementPermittedCheck": false,
-      "disableHeightPlacementCheck": false,
+      "disableHeightPlacementCheck": true,
       "disableIsUnderwaterCheck": false,
-      "disableIsInTerrainCheck": false,
+      "disableIsInTerrainCheck": true,
+      "disableColdAreaPlacementCheck": false,
       "disallowedTypesInUnderground": [
-        "GardenPlot",
         "FenceKit",
         "TerritoryFlagKit",
-        "WatchtowerKit"
+        "WatchtowerKit",
+        "EvenMoreDoorKit",
+        "EvenMoreDoorKit_Double"
       ]
     },
     "ConstructionData": {
-      "disablePerformRoofCheck": false,
-      "disableIsCollidingCheck": false,
+      "disablePerformRoofCheck": true,
+      "disableIsCollidingCheck": true,
       "disableDistanceCheck": false
     }
   },
@@ -80,9 +88,9 @@
       "hitDirectionBehaviour": 1,
       "hitDirectionStyle": 0,
       "hitDirectionIndicatorColorStr": "0xffbb0a1e",
-      "hitDirectionMaxDuration": 2,
+      "hitDirectionMaxDuration": 2.0,
       "hitDirectionBreakPointRelative": 0.2,
-      "hitDirectionScatter": 10,
+      "hitDirectionScatter": 10.0,
       "hitIndicationPostProcessEnabled": true
     }
   },
@@ -91,5 +99,9 @@
     "ignoreNavItemsOwnership": false,
     "displayPlayerPosition": false,
     "displayNavInfo": true
-  }
+  },
+	"VehicleData":
+	{
+		"boatDecayMultiplier": 1
+	}
 }
