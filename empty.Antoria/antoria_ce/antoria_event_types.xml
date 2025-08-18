@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <types>
+	<!-- Keycard -->	
+    <type name="Antoria_KeyCard">
+        <nominal>11</nominal>
+        <lifetime>14400</lifetime>
+        <restock>0</restock>
+        <min>7</min>
+        <quantmin>-1</quantmin>
+        <quantmax>-1</quantmax>
+        <cost>100</cost>
+        <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+        <category name="tools"/>
+		<usage name="Military"/>
+        <usage name="ContaminatedArea"/>
+		<usage name="Special"/>
+    </type>		
 	<!-- Police van wreck -->
 	<type name="Land_Vaux_Policedvan_1">
 		<nominal>0</nominal>
@@ -11,8 +26,18 @@
 		<cost>100</cost>
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 	</type>
-	<!-- Police van wreck -->
-	
+	<!-- Crumpets Loot barrel -->	
+   <type name="Crumpet_Barrel_Red_Loot">
+      <nominal>0</nominal>
+      <lifetime>3600</lifetime>
+      <restock>0</restock>
+      <min>0</min>
+      <quantmin>-1</quantmin>
+      <quantmax>-1</quantmax>
+      <cost>100</cost>
+      <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+      <category name="containers" />
+   </type>
    <!-- Containers -->
    <type name="Land_ContainerLocked_Blue_DE">
       <nominal>0</nominal>
@@ -114,4 +139,60 @@
       <value name="Tier6" />
       <value name="Tier7" />
    </type>
+   
+   <!-- Titan exo suit --> 
+        <type name="TitanSuit">
+		<nominal>1</nominal>
+		<lifetime>388700</lifetime>
+		<restock>0</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+        <usage name="ContaminatedArea"/>
+		<usage name="Special"/>
+		<usage name="Underground"/>
+		<value name="Tier6"/>
+	</type>
+      <type name="Titan_Battery">
+		<nominal>1</nominal>
+		<lifetime>388700</lifetime>
+		<restock>0</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+		<usage name="ContaminatedArea"/>
+		<usage name="Special"/>
+		<usage name="Underground"/>
+		<value name="Tier7"/>
+   	</type>
+      <type name="Titan_Bag">
+		<nominal>1</nominal>
+		<lifetime>388700</lifetime>
+		<restock>0</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+		<usage name="ContaminatedArea"/>
+		<usage name="Special"/>
+		<usage name="Underground"/>
+	</type>
+      <type name="Titan_BatteryCharger">
+		<nominal>1</nominal>
+		<lifetime>388700</lifetime>
+		<restock>0</restock>
+		<min>1</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0" />
+		<usage name="ContaminatedArea"/>
+		<usage name="Special"/>
+		<usage name="Underground"/>
+	</type>
 </types>
