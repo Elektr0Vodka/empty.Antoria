@@ -144,14 +144,14 @@
         <limit>custom</limit>
         <active>1</active>
         <children>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbM_kid"/>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbM_kid2"/>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbM_kid3"/>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbF_kid"/>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbF_kid2"/>
-            <child lootmax="4" lootmin="0" max="0" min="2" type="ZmbF_kid3"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbF_SkaterYoung_Striped_kid"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbF_SkaterYoung_Brown_kid"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbF_SkaterYoung_Violet_kid"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbM_SkaterYoung_Brown_kid"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbM_SkaterYoung_Green_kid"/>
+            <child lootmax="5" lootmin="0" max="2" min="0" type="ZmbM_SkaterYoung_Grey_kid"/>
         </children>
-    </event>
+    </event>	
     	<event name="AnimalPolarBear">
 		<nominal>0</nominal>
 		<min>5</min>
@@ -166,8 +166,116 @@
 		<limit>custom</limit>
 		<active>1</active>
 		<children>
-			<child lootmax="0" lootmin="0" max="1" min="1" type="Animal_UrsusMaritimus2"/>
 			<child lootmax="0" lootmin="0" max="1" min="1" type="Animal_UrsusMaritimus"/>
+			<child lootmax="0" lootmin="0" max="2" min="0" type="Animal_UrsusMaritimus_cub"/>
 		</children>
 	</event>
+   <event name="StaticMilitaryConvoy">
+      <nominal>3</nominal>
+      <min>0</min>
+      <max>0</max>
+      <lifetime>1800</lifetime>
+      <restock>0</restock>
+      <saferadius>1000</saferadius>
+      <distanceradius>1000</distanceradius>
+      <cleanupradius>1000</cleanupradius>
+      <secondary>InfectedArmyConvoy</secondary>
+      <flags deletable="1" init_random="0" remove_damaged="0" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>0</active>
+      <children />
+   </event>
+   
+   <event name="StaticTrain">
+      <nominal>2</nominal>
+      <min>1</min>
+      <max>0</max>
+      <lifetime>5400</lifetime>
+      <restock>0</restock>
+      <saferadius>500</saferadius>
+      <distanceradius>1000</distanceradius>
+      <cleanupradius>1000</cleanupradius>
+      <secondary>InfectedIndustrial</secondary>
+      <flags deletable="1" init_random="0" remove_damaged="0" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>1</active>
+      <children />
+   </event>
+   <!-- Containers -->
+   <event name="StaticContainerLocked">
+      <nominal>10</nominal>
+      <min>10</min>
+      <max>10</max>
+      <lifetime>1800</lifetime>
+      <restock>0</restock>
+      <saferadius>500</saferadius>
+      <distanceradius>150</distanceradius>
+      <cleanupradius>250</cleanupradius>
+      <flags deletable="1" init_random="0" remove_damaged="0" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>1</active>
+      <children>
+         <child lootmax="9" lootmin="5" max="10" min="0" type="Land_ContainerLocked_Blue_DE" />
+         <child lootmax="9" lootmin="5" max="10" min="0" type="Land_ContainerLocked_Yellow_DE" />
+         <child lootmax="9" lootmin="5" max="10" min="0" type="Land_ContainerLocked_Orange_DE" />
+         <child lootmax="9" lootmin="5" max="10" min="0" type="Land_ContainerLocked_Red_DE" />
+      </children>
+   </event>
+   <!-- Endgame Barrel Event -->
+   <event name="ItemCrumpet_Endgame_Barrel">
+      <nominal>2</nominal>
+      <min>2</min>
+      <max>2</max>
+      <lifetime>3600</lifetime>
+      <restock>0</restock>
+      <saferadius>100</saferadius>
+      <distanceradius>1</distanceradius>
+      <cleanupradius>200</cleanupradius>
+      <flags deletable="1" init_random="0" remove_damaged="1" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>1</active>
+      <children>
+         <child type="Crumpet_Barrel_Red_Loot" lootmin="8" lootmax="20" min="2" max="2" />
+      </children>
+   </event>
+   <!-- WDS Barrel Event -->
+   <event name="ItemCrumpet_WDS_Barrel">
+      <nominal>2</nominal>
+      <min>2</min>
+      <max>2</max>
+      <lifetime>3600</lifetime>
+      <restock>0</restock>
+      <saferadius>100</saferadius>
+      <distanceradius>1</distanceradius>
+      <cleanupradius>200</cleanupradius>
+      <flags deletable="1" init_random="0" remove_damaged="1" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>1</active>
+      <children>
+         <child type="Crumpet_Barrel_Red_Loot" lootmin="8" lootmax="20" min="2" max="2" />
+      </children>
+   </event>
+   <!-- Bunker Barrel Event -->
+   <event name="ItemCrumpet_Bunker_Barrel">
+      <nominal>10</nominal>
+      <min>10</min>
+      <max>10</max>
+      <lifetime>3600</lifetime>
+      <restock>0</restock>
+      <saferadius>100</saferadius>
+      <distanceradius>1</distanceradius>
+      <cleanupradius>200</cleanupradius>
+      <flags deletable="1" init_random="0" remove_damaged="1" />
+      <position>fixed</position>
+      <limit>child</limit>
+      <active>1</active>
+      <children>
+         <child type="Crumpet_Barrel_Red_Loot" lootmin="8" lootmax="20" min="1" max="1" />
+      </children>
+   </event>
 </events>
