@@ -47,10 +47,15 @@
 		<file name="antoria_endgame_types.xml" type="types"/>
 		<file name="antoria_event_types.xml" type="types"/>
 		<file name="antoria_infected_types.xml" type="types"/>
+		<file name="antoria_weapon_types.xml" type="types"/>
 		<file name="antoria_events.xml" type="events"/>
 		<file name="antoria_spawnabletypes.xml" type="spawnabletypes"/>
 	</ce>
 	<!-- Mod CE All mod types go in this folder -->
-	<ce folder="mod_ce">
+	<ce folder="mods_ce">
+		<file name="horse_types.xml" type="types"/>
+		<file name="sherpa_types.xml" type="types"/>
+		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>		
+		<file name="mod_events.xml" type="events"/>
 	</ce> 
 </economycore>
