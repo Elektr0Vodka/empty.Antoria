@@ -44,7 +44,7 @@
 	<ce folder="antoria_ce">
 		<file name="antoria_animal_types.xml" type="types"/>
 		<file name="antoria_clothing_types.xml" type="types"/>
-		<file name="antoria_endgame_types.xml" type="types"/>
+		<file name="antoria_consumables_types.xml" type="types"/>
 		<file name="antoria_event_types.xml" type="types"/>
 		<file name="antoria_infected_types.xml" type="types"/>
 		<file name="antoria_weapon_types.xml" type="types"/>
@@ -54,6 +54,7 @@
 	<!-- Mod CE All mod types go in this folder -->
 	<ce folder="mods_ce">
 		<file name="horse_types.xml" type="types"/>
+		<file name="radzone_types.xml" type="types"/>
 		<file name="sherpa_types.xml" type="types"/>
 		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>		
 		<file name="mod_events.xml" type="events"/>
