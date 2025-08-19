@@ -719,7 +719,45 @@
     <event name="AnimalWildBoar" />
     <event name="AnimalBear" />
     <event name="AnimalPolarBear" />
-	
+	<!-- Antoria spawns -->
+	<event name="StaticAbandoned">
+    <zone smin="0" smax="0" dmin="1" dmax="1" r="1"/>
+    <pos x="6415.12"  z="6358.24"  a="280" group="Abandoned_Antoria_Large01"/>
+    <pos x="10114.90" z="1539.77"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="10118.99" z="3769.35"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="18433.91" z="5110.11"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="12949.10" z="3929.31"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="18164.06" z="2501.14"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="17055.89" z="1628.88"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="10424.40" z="6243.29"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="8503.25"  z="5689.32"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="14800.12" z="6545.11"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="11547.17" z="4535.22"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="2606.95"  z="4702.90"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="6600.28"  z="7271.88"  a="0" group="Abandoned_Antoria_Large01"/>
+    <pos x="12121.52" z="2793.67"  a="50" group="Abandoned_Antoria_Large01"/>
+    <pos x="12843.65" z="4552.35"  a="0" group="Abandoned_Antoria_Large01"/>
+    <pos x="2073.13"  z="4378.39"  a="160.25" group="Abandoned_Antoria_Large01"/>
+    <pos x="1434.71"  z="2327.61"  a="280.34" group="Abandoned_Antoria_Large01"/>
+    <pos x="5622.64"  z="1355.25"  a="227.02" group="Abandoned_Antoria_Large01"/>
+    <pos x="6764.27"  z="2777.55"  a="120.37"  group="Abandoned_Antoria_Large01"/>
+    <pos x="11757.90" z="2940.17"  a="345.25" group="Abandoned_Antoria_Large01"/>
+    <pos x="18331.50" z="6908.65"  a="175.63" group="Abandoned_Antoria_Large01"/>
+    <pos x="18257.19" z="8446.06"  a="221.51" group="Abandoned_Antoria_Large01"/>
+    <pos x="13668.15" z="7096.03"  a="195.14" group="Abandoned_Antoria_Large01"/>
+    <pos x="9767.96"  z="5181.33"  a="195.14" group="Abandoned_Antoria_Large01"/>
+    <pos x="5191.77"  z="5152.20"  a="316.17" group="Abandoned_Antoria_Large01"/>
+    <pos x="9764.14"  z="9044.35"  a="60.40"  group="Abandoned_Antoria_Large01"/>
+    <pos x="12303.96" z="9336.45"  a="258.91" group="Abandoned_Antoria_Large01"/>
+    <pos x="9744.87"  z="8752.72"  a="65.81"  group="Abandoned_Antoria_Large01"/>
+    <pos x="12195.60" z="7961.95"  a="98.51"  group="Abandoned_Antoria_Large01"/>
+    <pos x="15398.30" z="6089.19" a="7.57"  group="Abandoned_Antoria_Large01"/>
+    <pos x="18109.00" z="3412.93" a="52.41" group="Abandoned_Antoria_Large01"/>
+    <pos x="3535.46"  z="4644.59" a="52.41" group="Abandoned_Antoria_Large01"/>
+    <pos x="7829.33"  z="8915.89" a="166.00" group="Abandoned_Antoria_Large01"/>
+    <pos x="9631.59"  z="5703.80" a="0.00"  group="Abandoned_Antoria_Large01"/>
+</event>
+
 	<!-- Optional Mod spawns -->
 	
 		<!-- larger Boat sea spawns, tested with Maharlika boats -->
@@ -788,7 +826,7 @@
 		<pos x="3765.861816" y="0.949392" z="15098.753906" a="0.691686"/>
 		<pos x="8475.003906" y="1.049433" z="15056.172852" a="0.691686"/>
 	</event>
-	 <event name="VehicleBoatSmall"> <!-- inshore coordinates by The_Misfit spawn small boats only -->
+	<event name="VehicleBoatSmall"> <!-- inshore boat coordinates by The_Misfit spawn small boats only -->
         <pos x="16011.4" y="142.8" z="4791.7" a="0.0"/>
         <pos x="15009.8" y="142.9" z="4984.3" a="0.0"/>
         <pos x="14444.3" y="142.7" z="5535.0" a="0.0"/>
