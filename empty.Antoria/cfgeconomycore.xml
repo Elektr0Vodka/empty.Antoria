@@ -56,8 +56,10 @@
 		<!-- example line to show how to comment out and prevent file from being loaded <file name="bicycle_types.xml" type="types"/> -->
 		<file name="bicycle_types.xml" type="types"/>
 		<file name="horse_types.xml" type="types"/>
+		<file name="mbm_gokart_types.xml" type="types"/>
 		<file name="radzone_types.xml" type="types"/>
 		<file name="sherpa_types.xml" type="types"/>
+		<file name="mbm_gokart_spawnabletypes.xml" type="spawnabletypes"/>	
 		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>		
 		<file name="mod_events.xml" type="events"/>
 	</ce> 
