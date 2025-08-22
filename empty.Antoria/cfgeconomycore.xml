@@ -18,8 +18,7 @@
 		<rootclass name="BoatScript" act="car" reportMemoryLOD="no"/>
 		<!-- boats -->
 	</classes>
-	<defaults>
-		<default name="clear_loot" value="false"/>
+	<defaults> <!-- removed clear_loot line as it has no place in DZ -->
 		<default name="dyn_radius" value="30"/>
 		<default name="dyn_smin" value="0"/>
 		<default name="dyn_smax" value="0"/>
@@ -53,7 +52,7 @@
 	</ce>
 	<!-- Mods CE All mod types.xml's go in this folder comment the ones you don't want to load -->
 	<ce folder="mods_ce">
-		<!-- example line to show how to comment out and prevent file from being loaded <file name="bicycle_types.xml" type="types"/> -->
+		<!-- example line to show how to comment out and prevent file from being loaded <file name="bicycle_types.xml" type="types"/> 
 		<file name="bicycle_types.xml" type="types"/>
 		<file name="horse_types.xml" type="types"/>
 		<file name="mbm_gokart_types.xml" type="types"/>
@@ -61,6 +60,6 @@
 		<file name="sherpa_types.xml" type="types"/>
 		<file name="mbm_gokart_spawnabletypes.xml" type="spawnabletypes"/>	
 		<file name="sherpa_spawnabletypes.xml" type="spawnabletypes"/>		
-		<file name="mod_events.xml" type="events"/>
+		<file name="mod_events.xml" type="events"/> -->
 	</ce> 
 </economycore>
