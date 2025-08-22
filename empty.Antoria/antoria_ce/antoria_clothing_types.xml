@@ -1114,7 +1114,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieTop_Jingle_Green">
 		<nominal>0</nominal>
@@ -1127,7 +1127,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieSuit_Jingle_Green">
 		<nominal>0</nominal>
@@ -1140,7 +1140,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieHood_Jingle_Green">
 		<nominal>0</nominal>
@@ -1153,7 +1153,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieAtt_Jingle_Green">
 		<nominal>0</nominal>
@@ -1166,7 +1166,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieBushrag_Jingle_Snow">
 		<nominal>0</nominal>
@@ -1179,7 +1179,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieTop_Jingle_Snow">
 		<nominal>0</nominal>
@@ -1192,7 +1192,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieSuit_Jingle_Snow">
 		<nominal>0</nominal>
@@ -1205,7 +1205,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieHood_Jingle_Snow">
 		<nominal>0</nominal>
@@ -1218,7 +1218,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieAtt_Jingle_Snow">
 		<nominal>0</nominal>
@@ -1231,7 +1231,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieBushrag_Jingle_Net">
 		<nominal>0</nominal>
@@ -1244,7 +1244,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieTop_Jingle_Net">
 		<nominal>0</nominal>
@@ -1257,7 +1257,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieSuit_Jingle_Net">
 		<nominal>0</nominal>
@@ -1270,7 +1270,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieHood_Jingle_Net">
 		<nominal>0</nominal>
@@ -1283,7 +1283,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<type name="GhillieAtt_Jingle_Net">
 		<nominal>0</nominal>
@@ -1296,7 +1296,7 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 		<category name="clothes"/>
 		<usage name="Military"/>
-		<usage name="Seasonal"/>
+		<usage name="SeasonalEvent"/>
 	</type>
 	<!-- Crumpet Tux and Barrel-->
    <type name="ManSuit_JetBlack">
