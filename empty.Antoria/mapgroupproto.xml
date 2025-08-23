@@ -19223,25 +19223,6 @@
 			<point pos="1.128418 1.277603 -0.120117" range="0.564091" height="1.382492"/>
 		</container>
 	</group>
-	<group name="flip_apocalyptic_building" lootmax="58">
-		<usage name="Industrial"/>
-		<usage name="Farm"/>
-		<usage name="Medic"/>
-		<usage name="Farm"/>
-		<usage name="Coast"/>
-		<usage name="Town"/>
-		<usage name="Village"/>
-		<usage name="Hunting"/>
-		<usage name="Office"/>
-		<container name="lootFloor" lootmax="28">
-			<category name="tools"/>
-			<category name="clothes"/>
-			<category name="weapons"/>
-			<category name="food"/>
-			<tag name="floor"/>
-			<tag name="ground"/>
-		</container>
-	</group>
 	<group name="Land_Tent_antoria_1" lootmax="4">
 		<usage name="Military"/>
 		<container name="lootFloor" lootmax="4">
@@ -20700,6 +20681,31 @@
 <group name="Land_Vaux_Policedvan_1" lootmax="5">
 	<usage name="Police"/>
 	<container name="lootFloor" lootmax="5">
+		<category name="food"/>
+		<category name="tools"/>
+		<category name="containers"/>
+		<category name="clothes"/>
+		<category name="books"/>
+		<category name="weapons"/>
+		<category name="explosives"/>
+		<tag name="floor"/>
+		<tag name="shelves"/>
+		<tag name="ground"/>
+		<point pos="-1.567020 -1.160705 1.593589" range="1" height="1"/>
+		<point pos="0.613864 -1.159081 1.568207" range="1" height="1"/>
+		<point pos="3.188408 -1.165041 0.401231" range="1" height="1"/>
+		<point pos="3.749133 -1.155205 -0.778799" range="1" height="1"/>
+		<point pos="-1.192623 -1.164655 -2.029553" range="1" height="1"/>
+		<point pos="0.549238 -1.154655 -1.761544" range="1" height="1"/>
+		<point pos="2.176100 1.062016 -0.052051" range="1" height="1"/>
+		<point pos="0.237935 1.032647 0.007692" range="1" height="1"/>
+		<point pos="2.375321 -1.129957 -1.799070" range="1" height="1"/>
+		<point pos="2.663896 -1.137881 1.634801" range="1" height="1"/>
+	</container>
+</group>
+<group name="Land_Vaux_Policedvan_1_DE" lootmax="8">
+	<usage name="Police"/>
+	<container name="lootFloor" lootmax="8">
 		<category name="food"/>
 		<category name="tools"/>
 		<category name="containers"/>
