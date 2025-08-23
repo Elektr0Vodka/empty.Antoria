@@ -91,7 +91,7 @@
 	<child type="Land_Train_Wagon_Box_Mil_DE" deloot="0" lootmax="3" lootmin="1" x="-63.6240" z="32.0510" y="-0.5319" a="296.700008"/>
 	<child type="StaticObj_Train_Wagon_Flat_Industrial_Barrels_DE" deloot="0" lootmax="3" lootmin="1" x="-76.7490" z="38.5984" y="-1.7465" a="296.800011"/>
 	<child type="StaticObj_Train_Wagon_Flat_Industrial_Planks_DE" deloot="0" lootmax="3" lootmin="1" x="-92.1045" z="46.3071" y="-1.7389" a="296.800011"/>
-	<child type="Land_Wreck_V3S" deloot="0" lootmax="3" lootmin="1" x="-12.4595" z="6.2478" y="0.5731" a="297"/>
+	<child type="Land_Wreck_V3S_DE" deloot="0" lootmax="3" lootmin="1" x="-12.4595" z="6.2478" y="0.5731" a="297"/>
 	<child type="Land_Train_Wagon_Box_Mil_DE" deloot="0" lootmax="3" lootmin="1" x="-105.2451" z="52.9102" y="-0.5819" a="296.200005"/>
 	<child type="Land_Train_Wagon_Box_Mil_DE" deloot="0" lootmax="3" lootmin="1" x="-116.1494" z="57.8884" y="-0.5819" a="293.399994"/>
 	<child type="Land_Train_Wagon_Box_Mil_DE" deloot="0" lootmax="3" lootmin="1" x="-127.2896" z="62.3923" y="-0.5819" a="291.400002"/>
@@ -108,7 +108,7 @@
 	<child type="StaticObj_Wreck_Train_Wagon_Tanker_DE" deloot="0" lootmax="3" lootmin="1" x="-63.6240" z="32.0510" y="-0.5319" a="296.700008"/>
 	<child type="StaticObj_Train_Wagon_Flat_Industrial_Barrels_DE" deloot="0" lootmax="3" lootmin="1" x="-76.7490" z="38.5984" y="-1.7465" a="296.800011"/>
 	<child type="StaticObj_Train_Wagon_Flat_Industrial_Planks_DE" deloot="0" lootmax="3" lootmin="1" x="-92.1045" z="46.3071" y="-1.7389" a="296.800011"/>
-	<child type="Land_Wreck_V3S" deloot="0" lootmax="3" lootmin="1" x="-12.4595" z="6.2478" y="0.5731" a="297"/>
+	<child type="Land_Wreck_V3S_DE" deloot="0" lootmax="3" lootmin="1" x="-12.4595" z="6.2478" y="0.5731" a="297"/>
 	<child type="Land_Train_Wagon_Box_DE" deloot="0" lootmax="3" lootmin="1" x="-105.2451" z="52.9102" y="-0.5819" a="296.200005"/>
 	<child type="Land_Train_Wagon_Box_DE" deloot="0" lootmax="3" lootmin="1" x="-116.1494" z="57.8884" y="-0.5819" a="293.399994"/>
 	<child type="Land_Train_Wagon_Box_DE" deloot="0" lootmax="3" lootmin="1" x="-127.2896" z="62.3923" y="-0.5819" a="291.400002"/>
