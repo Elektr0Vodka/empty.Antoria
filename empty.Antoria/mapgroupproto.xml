@@ -15378,23 +15378,12 @@
 	</group>
 	<group name="Land_Farm_Hopper2">
 		<usage name="Village"/>
-		<container name="lootFloor" lootmax="2">
+		<container name="lootFloor" lootmax="1">
 			<category name="tools"/>
 			<category name="containers"/>
 			<category name="clothes"/>
 			<tag name="floor"/>
-		</container>
-		<container name="lootshelves" lootmax="2">
-			<category name="tools"/>
-			<category name="containers"/>
-			<category name="clothes"/>
-			<category name="food"/>
-			<category name="books"/>
-			<tag name="shelves"/>
-		</container>
-		<container name="lootweapons" lootmax="2">
-			<category name="weapons"/>
-			<category name="explosives"/>
+		<point pos="0.261873 4.610715 -0.011875" range="0.5" height="1" /> 
 		</container>
 	</group>
 	<group name="Land_Ruin_HouseBig1">
@@ -19245,15 +19234,8 @@
 	</container>
 </group>
 <group name="Land_Vlad_Tram" lootmax="2">
-	<usage name="Industrial"/>
-	<usage name="Farm"/>
-	<usage name="Medic"/>
-	<usage name="Farm"/>
-	<usage name="Coast"/>
 	<usage name="Town"/>
 	<usage name="Village"/>
-	<usage name="Hunting"/>
-	<usage name="Office"/>
 	<container name="lootFloor" lootmax="2">
 		<category name="tools"/>
 		<category name="clothes"/>
@@ -19261,6 +19243,8 @@
 		<category name="food"/>
 		<tag name="floor"/>
 		<tag name="ground"/>
+		<point pos="0.100000 -1.389626 -2.100000" range="0.5" height="1" /> 
+		<point pos="0.100000 -1.331207 2.200000" range="0.5" height="1" /> 
 	</container>
 </group>
 <group name="Land_Vlad_Construction" lootmax="15">
