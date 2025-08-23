@@ -101,7 +101,7 @@ Below is a sample `serverDZ.cfg` do not forget to change ports, passwords, viewd
 
 ```cfg
 // ======================================================
-// Basic server settings
+// Basic server settings - sorted only for initial setup, the server will change the order on first run.
 // ======================================================
 hostname = "My Antoria Server";     // Server name displayed in server browser
 password = "";                      // Empty = no join password
@@ -131,15 +131,6 @@ serverNightTimeAcceleration = 3;    // Time acceleration (night)
 loginQueueConcurrentPlayers = 5;    // Players processed at once during login
 loginQueueMaxPlayers = 500;         // Maximum in queue
 instanceId = 1;                     // Unique server instance ID
-
-// ======================================================
-// Messages of the day
-// ======================================================
-motd[] = {
-    "Welcome to our Antoria Server!",
-    "Join our Discord for support: discord.gg/yPwsWmB9rr"
-};
-motdInterval = 1800;                 // Message interval in seconds
 
 // ======================================================
 // Logs
