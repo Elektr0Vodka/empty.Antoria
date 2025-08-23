@@ -9,18 +9,15 @@ This repository contains the core configuration files needed to deploy and run t
 
 The repository includes all essential mission files:
 
-- `empty.Antoria` — Main mission folder.
-- `areaflags.map`, `cfgAreaFlags.xml` — Area flag definitions.
-- `cfgeconomycore.xml` — Economy and loot settings.
-- `cfgeventgroups.xml`, `cfgeventspawns.xml` — Event group and spawn logic.
-- `cfgplayerspawnpoints.xml` — Player spawn points.
-- `cfgspawnabletypes.xml` — Spawnable object definitions.
-- `cfgenvironment.xml`, `cfgweather.xml` — Environment & weather configuration.
-- `init.c` — Mission initialization logic.
-- `mapgroup*.xml` — Map group/cluster definitions.
-- `serverDZ.cfg` — Example server config file.
-- `start_antoria_server.bat` — Customisable server start script (Windows servers only).
-- Plus other supporting XML/JSON config files.
+- `empty.Antoria/` — Main mission folder containing the core mission files.
+- `Antoria Economy Editor Files/` — Contains economy editor files for Antoria.
+- `Custom editor builds/` — Includes custom editor builds for Antoria.
+- `keys/` — Directory for server keys.
+- `profiles/` — Contains server profile configurations.
+- `HiNetPerfserverDZ.cfg` — Server configuration file.
+- `readme.md` — This README file.
+- `serverDZ.cfg` — Server configuration file.
+- `start_antoria_server.bat` — Batch file to start the Antoria server.
 
 ---
 
