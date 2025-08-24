@@ -1,3 +1,4 @@
+# For anyone stumbling upon this, these files are currently only working for the dev version. They'll run on the regular one, but your log won't be happy.
 # empty.Antoria
 
 **Official mission files for the DayZ Antoria map.**  
