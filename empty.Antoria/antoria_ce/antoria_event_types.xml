@@ -27,7 +27,19 @@
 		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
 	</type>
 	
-	<!-- Big Ship wreck Dynamic Event -->
+	<!-- Snowmobile wreck Dynamic Event -->
+	<type name="Land_snow_mobile_vlad_1_DE">
+		<nominal>0</nominal>
+		<lifetime>3</lifetime>
+		<restock>0</restock>
+		<min>0</min>
+		<quantmin>-1</quantmin>
+		<quantmax>-1</quantmax>
+		<cost>100</cost>
+		<flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
+	</type>
+	
+	<!-- Big Ship wreck Dynamic Event Civ and Mil versions -->
 	<type name="StaticObj_Wreck_Ship_Big_Lifeboat_DE">
 		<nominal>0</nominal>
 		<lifetime>3</lifetime>
