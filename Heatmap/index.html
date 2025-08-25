@@ -59,11 +59,11 @@
 
     .controls {
       display: flex;
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 15px;
       flex-wrap: wrap;
+      gap: 15px 25px;
+      align-items: center;
       justify-content: center;
+      margin-bottom: 15px;
     }
 
     label {
@@ -87,7 +87,7 @@
     }
 
     input[type=range] {
-      width: 200px;
+      width: 160px;
       cursor: pointer;
     }
 
@@ -97,7 +97,7 @@
       border-radius: 8px;
       padding: 10px;
       box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       transition: background 0.3s, border 0.3s;
     }
 
@@ -140,6 +140,28 @@
       background: var(--theme-button-bg);
       color: var(--theme-button-text);
     }
+
+    #statusBox {
+      margin: 10px 0 20px 0;
+      font-size: 0.9rem;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      padding: 8px 12px;
+      border-radius: 6px;
+      min-height: 20px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
@@ -149,9 +171,11 @@
   <div class="info-box">
     <p><strong>How to use:</strong></p>
     <ul>
-      <li>Select a <strong>map</strong> from the dropdown.</li>
+      <li>Select a <strong>map</strong> from the dropdown or load your own.</li>
       <li>Drag &amp; drop your exported <code>.json</code> data files onto the map area <em>or</em> use the <strong>Select Folder</strong> button.</li>
       <li>Use the <strong>time slider</strong> to filter events over time.</li>
+      <li>Use the <strong>layer toggles</strong> to show/hide Waypoints, Deaths, Storages, and Zombies.</li>
+      <li>Adjust <strong>heatmap intensity</strong> for better visibility.</li>
       <li>Click <strong>Merge Data and Map</strong> to export a combined image.</li>
       <li>Switch between <strong>dark</strong> and <strong>light</strong> themes using the toggle button.</li>
     </ul>
@@ -174,9 +198,27 @@
     </div>
 
     <div>
+      <label for="intensitySlider">Intensity:</label>
+      <input id="intensitySlider" type="range" min="1" max="5" value="2" step="0.1">
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="showWaypoints" checked>
+      <label for="showWaypoints">Waypoints</label>
+      <input type="checkbox" id="showDeaths" checked>
+      <label for="showDeaths">Deaths</label>
+      <input type="checkbox" id="showStorages" checked>
+      <label for="showStorages">Storages</label>
+      <input type="checkbox" id="showZombies" checked>
+      <label for="showZombies">Zombies</label>
+    </div>
+
+    <div>
       <button id="themeToggle" onclick="toggleTheme()">Enter the light side</button>
     </div>
   </div>
+
+  <div id="statusBox">No files loaded</div>
 
   <div id="dropbox" class="map-wrapper">
     <div id="mapImage">
@@ -212,8 +254,15 @@
     changeMap();
 
     let dropbox = document.getElementById("dropbox");
-    dropbox.addEventListener('dragover', dragover, false);
-    dropbox.addEventListener("drop", drop, false);
+    dropbox.addEventListener('dragover', e => e.preventDefault(), false);
+    dropbox.addEventListener("drop", e => {
+      e.preventDefault();
+      readFiles(e.dataTransfer.files);
+    }, false);
+
+    function setStatus(msg) {
+      document.getElementById("statusBox").textContent = msg;
+    }
 
     function changeMap() {
       let canvas = document.getElementById("mapCanvas");
@@ -242,21 +291,9 @@
         reader.onloadend = function() {
           document.getElementById("mapImage").style.backgroundImage = "url('"+reader.result+"')";
         }
-        if(files[0]) {
-          reader.readAsDataURL(files[0]);
-        }
+        if(files[0]) reader.readAsDataURL(files[0]);
       };
       input.click();
-    }
-
-    function dragover(e) {
-      e.preventDefault();
-    }
-
-    function drop(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      readFiles(e.dataTransfer.files);
     }
 
     function selectFolder() {
@@ -275,7 +312,13 @@
       storagepoints = [];
       zombiepoints = [];
 
-      let fileList = Array.from(files).filter(f => f.name.toLowerCase().endsWith(".json")); // only JSON
+      let fileList = Array.from(files).filter(f => f.name.toLowerCase().endsWith(".json"));
+      if(fileList.length === 0) {
+        setStatus("No JSON files found in folder.");
+        return;
+      }
+
+      let loaded = 0;
       fileList.forEach((file, idx) => {
         const reader = new FileReader();
         let lastFile = idx === fileList.length - 1;
@@ -286,6 +329,7 @@
             if(jsn.m_DeathPoints) deathpoints.push(...jsn.m_DeathPoints);
             if(jsn.m_StoragePoints) storagepoints.push(...jsn.m_StoragePoints);
             if(jsn.m_ZombiePoints) zombiepoints.push(...jsn.m_ZombiePoints);
+            loaded++;
           } catch(e) {
             console.warn("Skipping invalid file:", file.name);
           }
@@ -294,6 +338,7 @@
             document.getElementById("timeSlider").value = "1.0";
             maxTime = getMaxTime();
             drawHeatmap(1.0);
+            setStatus(`${loaded} files loaded → ${waypoints.length} waypoints, ${deathpoints.length} deaths, ${storagepoints.length} storages, ${zombiepoints.length} zombies`);
           }
         });
         reader.readAsText(file);
@@ -307,118 +352,142 @@
         for(let j = 0; j < playerwaypoints.length; j++) {
           max = Math.max(max, playerwaypoints[j][1]);
         }
-        for(let i = 0; i < deathpoints.length; i++) {
-          max = Math.max(max, deathpoints[i][1]);
-        }
-        for(let i = 0; i < storagepoints.length; i++) {
-          max = Math.max(max, storagepoints[i][1]);
-        }
-        for(let i = 0; i < zombiepoints.length; i++) {
-          max = Math.max(max, zombiepoints[i][1]);
-        }
       }
+      [...deathpoints, ...storagepoints, ...zombiepoints].forEach(p => max = Math.max(max, p[1]));
       return max;
     }
 
     var lastTimeValue = 1.0;
-    var inp = document.getElementById('timeSlider'); 
-    inp.addEventListener("input", function () {
+    document.getElementById('timeSlider').addEventListener("input", function () {
       if(this.value != lastTimeValue) {
         lastTimeValue = this.value;
         drawHeatmap(this.value);
       }
     });
 
+    document.getElementById('intensitySlider').addEventListener("input", function () {
+      drawHeatmap(lastTimeValue);
+    });
+
+    document.querySelectorAll("#showWaypoints,#showDeaths,#showStorages,#showZombies")
+      .forEach(cb => cb.addEventListener("change", ()=> drawHeatmap(lastTimeValue)));
+
     function drawHeatmap(time) {
-      let mapSelect = document.getElementById("mapSelect");
-      let value = mapSelect.value;
+      let value = document.getElementById("mapSelect").value;
       let size = mapSize.get(value);
+      let intensity = parseFloat(document.getElementById("intensitySlider").value);
 
       let canvas = document.getElementById("mapCanvas");
       let ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.globalAlpha = Math.max(1.0 / waypoints.length, 0.04);
-      for(let i = 0; i < waypoints.length; i++) {
-        let playerwaypoints = waypoints[i];
-        ctx.beginPath();
-        ctx.lineWidth = "1";
-        ctx.strokeStyle = "blue";
-        let firstPoint = true;
-        for(let j = 0; j < playerwaypoints.length; j++) {
-          let waypoint = playerwaypoints[j];
-          if(waypoint[1]/maxTime > time) continue;
-          let x = canvas.width / size * waypoint[0];
-          let y = canvas.height - (canvas.height / size * waypoint[2]);
-          if(firstPoint) {
-            ctx.moveTo(x, y)
-            firstPoint = false;
-          } else {
-            ctx.lineTo(x, y);
+      if(document.getElementById("showWaypoints").checked){
+        let heatCanvas = document.createElement("canvas");
+        heatCanvas.width = canvas.width;
+        heatCanvas.height = canvas.height;
+        let heatCtx = heatCanvas.getContext("2d");
+
+        for(let i = 0; i < waypoints.length; i++) {
+          let playerwaypoints = waypoints[i];
+          for(let j = 0; j < playerwaypoints.length; j++) {
+            let waypoint = playerwaypoints[j];
+            if(waypoint[1]/maxTime > time) continue;
+            let x = canvas.width / size * waypoint[0];
+            let y = canvas.height - (canvas.height / size * waypoint[2]);
+            let grd = heatCtx.createRadialGradient(x, y, 0, x, y, 20*intensity);
+            grd.addColorStop(0, "rgba(255,255,255,"+(0.15*intensity)+")");
+            grd.addColorStop(1, "rgba(255,255,255,0)");
+            heatCtx.fillStyle = grd;
+            heatCtx.fillRect(x-20*intensity, y-20*intensity, 40*intensity, 40*intensity);
           }
         }
-        ctx.stroke();
+
+        let img = heatCtx.getImageData(0, 0, heatCanvas.width, heatCanvas.height);
+        let data = img.data;
+        for(let i = 0; i < data.length; i += 4) {
+          let alpha = data[i+3] / 255;
+          if(alpha > 0) {
+            let color = getHeatColor(alpha);
+            data[i] = color[0];
+            data[i+1] = color[1];
+            data[i+2] = color[2];
+            data[i+3] = Math.min(255, alpha * 255);
+          }
+        }
+        heatCtx.putImageData(img, 0, 0);
+        ctx.drawImage(heatCanvas, 0, 0);
+      }
+
+      if(document.getElementById("showDeaths").checked){
+        ctx.globalAlpha = 1.0;
+        deathpoints.forEach(p => {
+          let x = canvas.width / size * p[0];
+          let y = canvas.height - (canvas.height / size * p[2]);
+          ctx.beginPath();
+          ctx.strokeStyle = "yellow";
+          ctx.arc(x, y, 5, 0, 2 * Math.PI);
+          ctx.stroke();
+        });
+      }
+
+      if(document.getElementById("showStorages").checked){
+        ctx.globalAlpha = 0.8;
+        storagepoints.forEach(p => {
+          let x = canvas.width / size * p[0];
+          let y = canvas.height - (canvas.height / size * p[2]);
+          ctx.beginPath();
+          ctx.strokeStyle = "red";
+          ctx.rect(x-4, y-4, 8, 8);
+          ctx.stroke();
+        });
+      }
+
+      if(document.getElementById("showZombies").checked){
+        ctx.globalAlpha = 0.4;
+        zombiepoints.forEach(p => {
+          let x = canvas.width / size * p[0];
+          let y = canvas.height - (canvas.height / size * p[2]);
+          ctx.beginPath();
+          ctx.strokeStyle = "darkorange";
+          ctx.arc(x, y, 4, 0, 2 * Math.PI);
+          ctx.stroke();
+        });
       }
 
       ctx.globalAlpha = 1.0;
-      for(let i = 0; i < deathpoints.length; i++) {
-        let waypoint = deathpoints[i];
-        let x = canvas.width / size * waypoint[0];
-        let y = canvas.height - (canvas.height / size * waypoint[2]);
-        ctx.beginPath();
-        ctx.lineWidth = "2";
-        ctx.strokeStyle = "Yellow";
-        ctx.arc(x, y, canvas.width*0.0015, 0, 2 * Math.PI);
-        ctx.stroke();
-      }
+    }
 
-      ctx.globalAlpha = 0.1;
-      for(let i = 0; i < storagepoints.length; i++) {
-        let waypoint = storagepoints[i];
-        let x = canvas.width / size * waypoint[0];
-        let y = canvas.height - (canvas.height / size * waypoint[2]);
-        ctx.beginPath();
-        ctx.lineWidth = "3";
-        ctx.strokeStyle = "Red";
-        ctx.rect(x-canvas.width*0.0015, y-canvas.width*0.0015, canvas.width*0.003, canvas.width*0.003);
-        ctx.stroke();
-      }
-
-      ctx.globalAlpha = 0.02;
-      for(let i = 0; i < zombiepoints.length; i++) {
-        let waypoint = zombiepoints[i];
-        let x = canvas.width / size * waypoint[0];
-        let y = canvas.height - (canvas.height / size * waypoint[2]);
-        ctx.beginPath();
-        ctx.lineWidth = "5";
-        ctx.strokeStyle = "darkorange";
-        ctx.arc(x, y, canvas.width*0.0015, 0, 2 * Math.PI);
-        ctx.stroke();
-      }
+    function getHeatColor(t) {
+      let r=0,g=0,b=0;
+      if(t < 0.25){ r=0; g=t*4*255; b=255; }
+      else if(t < 0.5){ r=0; g=255; b=(1-(t-0.25)*4)*255; }
+      else if(t < 0.75){ r=(t-0.5)*4*255; g=255; b=0; }
+      else { r=255; g=(1-(t-0.75)*4)*255; b=0; }
+      return [r,g,b];
     }
 
     function save() {
-      let merged = document.getElementById("mergedCanvas");
-      if(merged) merged.remove();
+      let mapCanvas = document.getElementById("mapCanvas");
+      let mapImage = document.getElementById("mapImage");
 
-      html2canvas(document.getElementById("mapImage"), {
-        allowTaint: true,
-      }).then(canvas => {
-        canvas.id = "mergedCanvas";
-        document.body.appendChild(canvas);
+      html2canvas(mapImage, {useCORS:true}).then(canvas => {
+        canvas.toBlob(function(blob){
+          saveAs(blob, "heatmap.png");
+        });
       });
     }
 
     function toggleTheme() {
-      document.body.classList.toggle("light");
+      let body = document.body;
       let btn = document.getElementById("themeToggle");
-      if(document.body.classList.contains("light")) {
-        btn.textContent = "Enter the dark side";
-      } else {
+      if(body.classList.contains("light")){
+        body.classList.remove("light");
         btn.textContent = "Enter the light side";
+      } else {
+        body.classList.add("light");
+        btn.textContent = "Enter the dark side";
       }
     }
   </script>
-
 </body>
 </html>
