@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DayZ Heatmap Generator</title>
+<style>
+:root {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --panel-bg: #2b2b2b;
+  --panel-border: #444;
+  --accent-color: #ffcc00;
+  --button-text: #000;
+}
+body.light {
+  --bg-color: #f8f8f8;
+  --text-color: #222;
+  --panel-bg: #fff;
+  --panel-border: #ccc;
+  --accent-color: #0077cc;
+  --button-text: #fff;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--panel-border);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 10px;
+}
+.sidebar button, .sidebar select, .sidebar input {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--accent-color);
+  color: var(--button-text);
+  font-weight: bold;
+}
+.sidebar button:hover, .sidebar select:hover, .sidebar input:hover { filter: brightness(0.9); }
+
+/* Main content */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+#mapCanvas {
+  flex: 1;
+  border-radius: 8px;
+}
+
+#statusBox {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  min-height: 20px;
+  width: calc(100% - 240px);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <button onclick="window.location='liveview.html'">Live View</button>
+  <button id="themeToggle">Enter the light side</button>
+
+  <label for="mapSelect">Map:</label>
+  <select id="mapSelect">
+    <option value="Antoria">Antoria</option>
+    <option value="Enoch">Enoch</option>
+    <option value="Chernarus">Chernarus</option>
+    <option value="Esseker">Esseker</option>
+  </select>
+
+  <label for="timeSlider">Time:</label>
+  <input type="range" id="timeSlider" min="0" max="1" value="1" step="0.01">
+
+  <label for="intensitySlider">Intensity:</label>
+  <input type="range" id="intensitySlider" min="1" max="5" value="2" step="0.1">
+
+  <label>Layers to export:</label>
+  <label><input type="checkbox" id="showWaypoints" checked> Waypoints</label>
+  <label><input type="checkbox" id="showDeaths" checked> Deaths</label>
+  <label><input type="checkbox" id="showStorages" checked> Storages</label>
+  <label><input type="checkbox" id="showZombies" checked> Zombies</label>
+  <label><input type="checkbox" id="showLegend" checked> Show Legend</label>
+
+  <button onClick="save()">Generate PNG</button>
+  <button onClick="document.getElementById('folderPicker').click()">Upload Folder</button>
+  <input type="file" id="folderPicker" webkitdirectory directory multiple style="display:none;">
+  <button onClick="document.getElementById('filePicker').click()">Upload Heatmap.JSON</button>
+  <input type="file" id="filePicker" accept=".json" multiple style="display:none;">
+</div>
+
+<div class="main">
+  <canvas id="mapCanvas"></canvas>
+  <div id="statusBox">No files loaded</div>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+// Map settings
+const mapSize = new Map([
+  ["Antoria", 20480], ["Enoch", 12800], ["Chernarus", 15360], ["Esseker", 12800]
+]);
+const mapImage = new Map([
+  ["Antoria", "https://raw.githubusercontent.com/Elektr0Vodka/empty.Antoria/main/ServerSideMods/Heatmap/map.png"],
+  ["Enoch", "https://github.com/BohemiaInteractive/DayZ-Central-Economy/raw/master/CETool/Enoch/map.png"],
+  ["Chernarus", "https://github.com/BohemiaInteractive/DayZ-Central-Economy/raw/master/CETool/ChernarusPlus/map.png"],
+  ["Esseker", "https://github.com/InclementDab/Esseker-Server/raw/main/Central%20Economy%20Tool/map.png"]
+]);
+
+let currentMap = "Antoria";
+let waypoints=[], deaths=[], storages=[], zombies=[], lastLoaded=[];
+let canvas = document.getElementById("mapCanvas");
+let ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas(){
+  canvas.width = window.innerWidth - 240;
+  canvas.height = window.innerHeight;
+  drawAll();
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Map selection
+document.getElementById("mapSelect").addEventListener("change", ()=>{
+  currentMap=document.getElementById("mapSelect").value;
+  drawAll();
+});
+
+// Theme toggle
+document.getElementById("themeToggle").addEventListener("click", ()=>{
+  document.body.classList.toggle("light");
+  document.getElementById("themeToggle").textContent = document.body.classList.contains("light") ? "Enter the dark side" : "Enter the light side";
+  drawAll();
+});
+
+// Folder picker
+document.getElementById("folderPicker").addEventListener("change", e=>{
+  const files=e.target.files;
+  readFiles(files,true);
+});
+
+// JSON file picker
+document.getElementById("filePicker").addEventListener("change", e=>{
+  const files=e.target.files;
+  readFiles(files,true);
+});
+
+// Layer toggles
+const layerToggles = {
+  waypoints: document.getElementById("showWaypoints"),
+  deaths: document.getElementById("showDeaths"),
+  storages: document.getElementById("showStorages"),
+  zombies: document.getElementById("showZombies"),
+  legend: document.getElementById("showLegend")
+};
+Object.values(layerToggles).forEach(cb => cb.addEventListener("change", drawAll));
+
+// Time slider
+document.getElementById("timeSlider").addEventListener("input", drawAll);
+
+// Read JSON files
+function readFiles(files, initial){
+  Array.from(files).filter(f=>f.name.toLowerCase().endsWith(".json")).forEach(f=>{
+    if(initial || !lastLoaded.includes(f.name)){
+      const r=new FileReader();
+      r.onload=()=>{
+        try{
+          const d=JSON.parse(r.result);
+          if(d.m_WayPoints) waypoints.push(...d.m_WayPoints);
+          if(d.m_DeathPoints) deaths.push(...d.m_DeathPoints);
+          if(d.m_StoragePoints) storages.push(...d.m_StoragePoints);
+          if(d.m_ZombiePoints) zombies.push(...d.m_ZombiePoints);
+          drawAll();
+        }catch(e){ console.error(e); }
+      };
+      r.readAsText(f);
+      lastLoaded.push(f.name);
+    }
+  });
+  document.getElementById("statusBox").textContent = `${waypoints.length} waypoints, ${deaths.length} deaths, ${storages.length} storages, ${zombies.length} zombies loaded.`;
+}
+
+// Draw map & points
+function drawAll(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(!mapImage.has(currentMap)) return;
+
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.src=mapImage.get(currentMap);
+  img.onload = ()=>{
+    const aspect = img.width/img.height;
+    let w = canvas.width, h = canvas.height;
+    if(canvas.width/canvas.height > aspect){ w = canvas.height * aspect; h = canvas.height; }
+    else { h = canvas.width / aspect; w = canvas.width; }
+    ctx.drawImage(img, (canvas.width-w)/2, (canvas.height-h)/2, w, h);
+    renderPoints(w,h);
+    renderLegend();
+  }
+}
+
+// Render points
+function renderPoints(mapW,mapH){
+  const size = mapSize.get(currentMap);
+  const timeVal = document.getElementById("timeSlider").value;
+
+  ctx.globalAlpha = 0.6;
+  if(layerToggles.waypoints.checked)
+    waypoints.forEach(p=>{
+      if(p[1]/getMaxTime(p) > timeVal) return;
+      let x=mapW/size*p[0];
+      let y=mapH/size*(size-p[2]);
+      ctx.fillStyle="rgba(255,0,0,0.5)";
+      ctx.beginPath();
+      ctx.arc(x+(canvas.width-mapW)/2, y+(canvas.height-mapH)/2,4,0,2*Math.PI);
+      ctx.fill();
+    });
+  ctx.globalAlpha = 1.0;
+}
+
+// Max time for scaling
+function getMaxTime(points){
+  if(!points || points.length===0) return 1;
+  return Math.max(...points.map(p=>p[1]||0),1);
+}
+
+// Render legend
+function renderLegend(){
+  if(!layerToggles.legend.checked) return;
+  const startX = 20, startY = 20;
+  ctx.fillStyle = "#fff";
+  ctx.font = "14px Arial";
+  ctx.fillText(`Waypoints: ${waypoints.length}`, startX+10, startY+25);
+  ctx.fillText(`Deaths: ${deaths.length}`, startX+10, startY+45);
+  ctx.fillText(`Storages: ${storages.length}`, startX+10, startY+65);
+  ctx.fillText(`Zombies: ${zombies.length}`, startX+10, startY+85);
+  const timeValue = document.getElementById("timeSlider").value;
+  ctx.fillText(`Time: ${(timeValue*100).toFixed(0)}%`, startX+10, startY+105);
+}
+
+// Save merged image
+function save(){
+  html2canvas(canvas.parentElement, {useCORS:true}).then(c=>{
+    c.toBlob(blob => saveAs(blob,"heatmap.png"));
+  });
+}
+</script>
+</body>
+</html>
