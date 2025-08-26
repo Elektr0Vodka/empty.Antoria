@@ -12,14 +12,6 @@
   --accent-color: #ffcc00;
   --button-text: #000;
 }
-body.light {
-  --bg-color: #f8f8f8;
-  --text-color: #222;
-  --panel-bg: #fff;
-  --panel-border: #ccc;
-  --accent-color: #0077cc;
-  --button-text: #fff;
-}
 body {
   font-family: Arial, sans-serif;
   background: var(--bg-color);
@@ -27,8 +19,6 @@ body {
   margin: 0;
   display: flex;
 }
-
-/* Sidebar */
 .sidebar {
   width: 220px;
   background: var(--panel-bg);
@@ -49,7 +39,6 @@ body {
 }
 .sidebar button:hover, .sidebar select:hover, .sidebar input:hover { filter: brightness(0.9); }
 
-/* Main content */
 .main {
   flex: 1;
   display: flex;
@@ -57,31 +46,28 @@ body {
   align-items: center;
   padding: 10px;
   position: relative;
-  overflow: hidden;
 }
 #mapCanvas {
   flex: 1;
   border-radius: 8px;
+  cursor: grab;
 }
-
-#statusBox {
-  margin: 10px 0;
-  font-size: 0.9rem;
-  background: var(--panel-bg);
+#legend {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(43,43,43,0.85);
   border: 1px solid var(--panel-border);
-  padding: 6px 12px;
   border-radius: 6px;
-  min-height: 20px;
-  width: calc(100% - 240px);
-  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--text-color);
 }
 </style>
 </head>
 <body>
-
 <div class="sidebar">
   <button onclick="window.location='liveview.html'">Live View</button>
-  <button id="themeToggle">Enter the light side</button>
 
   <label for="mapSelect">Map:</label>
   <select id="mapSelect">
@@ -97,26 +83,32 @@ body {
   <label for="intensitySlider">Intensity:</label>
   <input type="range" id="intensitySlider" min="1" max="5" value="2" step="0.1">
 
-  <label>Layers to export:</label>
+  <label>Layers:</label>
   <label><input type="checkbox" id="showWaypoints" checked> Waypoints</label>
   <label><input type="checkbox" id="showDeaths" checked> Deaths</label>
   <label><input type="checkbox" id="showStorages" checked> Storages</label>
   <label><input type="checkbox" id="showZombies" checked> Zombies</label>
-  <label><input type="checkbox" id="showLegend" checked> Show Legend</label>
+  <label><input type="checkbox" id="showLegend" checked> Legend</label>
 
-  <button onClick="save()">Generate PNG</button>
   <button onClick="document.getElementById('folderPicker').click()">Upload Folder</button>
   <input type="file" id="folderPicker" webkitdirectory directory multiple style="display:none;">
-  <button onClick="document.getElementById('filePicker').click()">Upload Heatmap.JSON</button>
-  <input type="file" id="filePicker" accept=".json" multiple style="display:none;">
+
+  <button onClick="document.getElementById('jsonPicker').click()">Upload Heatmap.JSON</button>
+  <input type="file" id="jsonPicker" accept=".json" style="display:none;">
+
+  <button onClick="save()">Export PNG</button>
 </div>
 
 <div class="main">
   <canvas id="mapCanvas"></canvas>
-  <div id="statusBox">No files loaded</div>
+  <div id="legend">Legend:<br>
+    <span id="wpCount">Waypoints: 0</span><br>
+    <span id="deathCount">Deaths: 0</span><br>
+    <span id="storageCount">Storages: 0</span><br>
+    <span id="zombieCount">Zombies: 0</span>
+  </div>
 </div>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script>
 // Map settings
@@ -131,9 +123,13 @@ const mapImage = new Map([
 ]);
 
 let currentMap = "Antoria";
-let waypoints=[], deaths=[], storages=[], zombies=[], lastLoaded=[];
+let datasets = []; // array of {name, waypoints, deaths, storages, zombies}
 let canvas = document.getElementById("mapCanvas");
 let ctx = canvas.getContext("2d");
+let mapImg = new Image();
+
+// Zoom/pan variables
+let scale = 1, offsetX = 0, offsetY = 0, isDragging = false, dragStart = {x:0,y:0};
 
 // Resize canvas
 function resizeCanvas(){
@@ -144,129 +140,175 @@ function resizeCanvas(){
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-// Map selection
+// Map select
 document.getElementById("mapSelect").addEventListener("change", ()=>{
-  currentMap=document.getElementById("mapSelect").value;
+  currentMap = document.getElementById("mapSelect").value;
   drawAll();
 });
 
-// Theme toggle
-document.getElementById("themeToggle").addEventListener("click", ()=>{
-  document.body.classList.toggle("light");
-  document.getElementById("themeToggle").textContent = document.body.classList.contains("light") ? "Enter the dark side" : "Enter the light side";
-  drawAll();
-});
+// File uploads
+document.getElementById("folderPicker").addEventListener("change", e=>loadFiles(e.target.files));
+document.getElementById("jsonPicker").addEventListener("change", e=>loadFiles(e.target.files));
 
-// Folder picker
-document.getElementById("folderPicker").addEventListener("change", e=>{
-  const files=e.target.files;
-  readFiles(files,true);
-});
-
-// JSON file picker
-document.getElementById("filePicker").addEventListener("change", e=>{
-  const files=e.target.files;
-  readFiles(files,true);
-});
-
-// Layer toggles
-const layerToggles = {
-  waypoints: document.getElementById("showWaypoints"),
-  deaths: document.getElementById("showDeaths"),
-  storages: document.getElementById("showStorages"),
-  zombies: document.getElementById("showZombies"),
-  legend: document.getElementById("showLegend")
-};
-Object.values(layerToggles).forEach(cb => cb.addEventListener("change", drawAll));
-
-// Time slider
-document.getElementById("timeSlider").addEventListener("input", drawAll);
-
-// Read JSON files
-function readFiles(files, initial){
+function loadFiles(files){
   Array.from(files).filter(f=>f.name.toLowerCase().endsWith(".json")).forEach(f=>{
-    if(initial || !lastLoaded.includes(f.name)){
-      const r=new FileReader();
-      r.onload=()=>{
-        try{
-          const d=JSON.parse(r.result);
-          if(d.m_WayPoints) waypoints.push(...d.m_WayPoints);
-          if(d.m_DeathPoints) deaths.push(...d.m_DeathPoints);
-          if(d.m_StoragePoints) storages.push(...d.m_StoragePoints);
-          if(d.m_ZombiePoints) zombies.push(...d.m_ZombiePoints);
-          drawAll();
-        }catch(e){ console.error(e); }
-      };
-      r.readAsText(f);
-      lastLoaded.push(f.name);
-    }
+    const r = new FileReader();
+    r.onload = ()=>{
+      try{
+        const d = JSON.parse(r.result);
+        datasets.push({
+          name: f.name,
+          waypoints: d.m_WayPoints || [],
+          deaths: d.m_DeathPoints || [],
+          storages: d.m_StoragePoints || [],
+          zombies: d.m_ZombiePoints || []
+        });
+        drawAll();
+      }catch(e){console.error(e);}
+    };
+    r.readAsText(f);
   });
-  document.getElementById("statusBox").textContent = `${waypoints.length} waypoints, ${deaths.length} deaths, ${storages.length} storages, ${zombies.length} zombies loaded.`;
 }
+
+// Zoom & pan events
+canvas.addEventListener("mousedown", e => {
+  isDragging = true;
+  dragStart.x = e.clientX - offsetX;
+  dragStart.y = e.clientY - offsetY;
+  canvas.style.cursor = "grabbing";
+});
+canvas.addEventListener("mousemove", e => {
+  if(isDragging){
+    offsetX = e.clientX - dragStart.x;
+    offsetY = e.clientY - dragStart.y;
+    drawAll();
+  }
+});
+canvas.addEventListener("mouseup", ()=>{ isDragging=false; canvas.style.cursor="grab"; });
+canvas.addEventListener("mouseleave", ()=>{ isDragging=false; canvas.style.cursor="grab"; });
+canvas.addEventListener("wheel", e=>{
+  e.preventDefault();
+  const zoomAmount = -e.deltaY * 0.001;
+  const mx = e.offsetX, my = e.offsetY;
+  const newScale = Math.min(Math.max(scale*(1+zoomAmount),0.5),5);
+  offsetX = mx - (mx - offsetX)*(newScale/scale);
+  offsetY = my - (my - offsetY)*(newScale/scale);
+  scale = newScale;
+  drawAll();
+});
 
 // Draw map & points
 function drawAll(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
   if(!mapImage.has(currentMap)) return;
+  mapImg.src = mapImage.get(currentMap);
+  mapImg.onload = ()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save();
+    ctx.translate(offsetX, offsetY);
+    ctx.scale(scale, scale);
 
-  const img=new Image();
-  img.crossOrigin="anonymous";
-  img.src=mapImage.get(currentMap);
-  img.onload = ()=>{
-    const aspect = img.width/img.height;
+    const aspect = mapImg.width/mapImg.height;
     let w = canvas.width, h = canvas.height;
-    if(canvas.width/canvas.height > aspect){ w = canvas.height * aspect; h = canvas.height; }
-    else { h = canvas.width / aspect; w = canvas.width; }
-    ctx.drawImage(img, (canvas.width-w)/2, (canvas.height-h)/2, w, h);
+    if(canvas.width/canvas.height > aspect){ w = canvas.height*aspect; h = canvas.height; }
+    else { h = canvas.width/aspect; w = canvas.width; }
+    ctx.drawImage(mapImg,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
     renderPoints(w,h);
-    renderLegend();
-  }
+
+    ctx.restore();
+  };
 }
 
-// Render points
 function renderPoints(mapW,mapH){
   const size = mapSize.get(currentMap);
-  const timeVal = document.getElementById("timeSlider").value;
+  const timeSlider = parseFloat(document.getElementById("timeSlider").value);
+  const intensity = parseFloat(document.getElementById("intensitySlider").value);
+  let wp=0, dp=0, sp=0, zp=0;
+  const centerX=(canvas.width-mapW)/2;
+  const centerY=(canvas.height-mapH)/2;
 
-  ctx.globalAlpha = 0.6;
-  if(layerToggles.waypoints.checked)
-    waypoints.forEach(p=>{
-      if(p[1]/getMaxTime(p) > timeVal) return;
-      let x=mapW/size*p[0];
-      let y=mapH/size*(size-p[2]);
-      ctx.fillStyle="rgba(255,0,0,0.5)";
-      ctx.beginPath();
-      ctx.arc(x+(canvas.width-mapW)/2, y+(canvas.height-mapH)/2,4,0,2*Math.PI);
-      ctx.fill();
-    });
-  ctx.globalAlpha = 1.0;
+  const count = Math.floor(datasets.length * timeSlider);
+
+  for(let k=0;k<count;k++){
+    const ds = datasets[k];
+
+    if(document.getElementById("showWaypoints").checked){
+      ctx.fillStyle = `rgba(255,0,0,${0.05*intensity})`;
+      ds.waypoints.forEach(p=>{
+        wp++;
+        let x = mapW/size*p[0]+centerX;
+        let y = mapH/size*(size-p[2])+centerY;
+        ctx.beginPath();
+        ctx.arc(x,y,20,0,2*Math.PI);
+        ctx.fill();
+      });
+    }
+
+    if(document.getElementById("showDeaths").checked){
+      ctx.fillStyle = "black";
+      ds.deaths.forEach(p=>{
+        dp++;
+        let x = mapW/size*p[0]+centerX;
+        let y = mapH/size*(size-p[2])+centerY;
+        ctx.fillRect(x-2,y-2,4,4);
+      });
+    }
+
+    if(document.getElementById("showStorages").checked){
+      ctx.fillStyle = "blue";
+      ds.storages.forEach(p=>{
+        sp++;
+        let x = mapW/size*p[0]+centerX;
+        let y = mapH/size*(size-p[2])+centerY;
+        ctx.fillRect(x-3,y-3,6,6);
+      });
+    }
+
+    if(document.getElementById("showZombies").checked){
+      ctx.fillStyle = "green";
+      ds.zombies.forEach(p=>{
+        zp++;
+        let x = mapW/size*p[0]+centerX;
+        let y = mapH/size*(size-p[2])+centerY;
+        ctx.beginPath();
+        ctx.arc(x,y,3,0,2*Math.PI);
+        ctx.fill();
+      });
+    }
+  }
+
+  document.getElementById("wpCount").textContent="Waypoints: "+wp;
+  document.getElementById("deathCount").textContent="Deaths: "+dp;
+  document.getElementById("storageCount").textContent="Storages: "+sp;
+  document.getElementById("zombieCount").textContent="Zombies: "+zp;
+
+  document.getElementById("legend").style.display=document.getElementById("showLegend").checked?"block":"none";
 }
 
-// Max time for scaling
-function getMaxTime(points){
-  if(!points || points.length===0) return 1;
-  return Math.max(...points.map(p=>p[1]||0),1);
-}
+// Event listeners
+["timeSlider","intensitySlider","showWaypoints","showDeaths","showStorages","showZombies","showLegend"]
+.forEach(id=>document.getElementById(id).addEventListener("input",drawAll));
 
-// Render legend
-function renderLegend(){
-  if(!layerToggles.legend.checked) return;
-  const startX = 20, startY = 20;
-  ctx.fillStyle = "#fff";
-  ctx.font = "14px Arial";
-  ctx.fillText(`Waypoints: ${waypoints.length}`, startX+10, startY+25);
-  ctx.fillText(`Deaths: ${deaths.length}`, startX+10, startY+45);
-  ctx.fillText(`Storages: ${storages.length}`, startX+10, startY+65);
-  ctx.fillText(`Zombies: ${zombies.length}`, startX+10, startY+85);
-  const timeValue = document.getElementById("timeSlider").value;
-  ctx.fillText(`Time: ${(timeValue*100).toFixed(0)}%`, startX+10, startY+105);
-}
-
-// Save merged image
+// Export PNG
 function save(){
-  html2canvas(canvas.parentElement, {useCORS:true}).then(c=>{
-    c.toBlob(blob => saveAs(blob,"heatmap.png"));
-  });
+  const includeLegend=document.getElementById("showLegend").checked;
+  let exportCanvas=document.createElement("canvas");
+  exportCanvas.width=canvas.width;
+  exportCanvas.height=canvas.height;
+  let ex=exportCanvas.getContext("2d");
+  ex.drawImage(canvas,0,0);
+
+  if(includeLegend){
+    ex.fillStyle="rgba(43,43,43,0.85)";
+    ex.fillRect(exportCanvas.width-160,exportCanvas.height-100,150,90);
+    ex.fillStyle="white";
+    ex.font="14px Arial";
+    ex.fillText(document.getElementById("wpCount").textContent,exportCanvas.width-150,exportCanvas.height-80);
+    ex.fillText(document.getElementById("deathCount").textContent,exportCanvas.width-150,exportCanvas.height-65);
+    ex.fillText(document.getElementById("storageCount").textContent,exportCanvas.width-150,exportCanvas.height-50);
+    ex.fillText(document.getElementById("zombieCount").textContent,exportCanvas.width-150,exportCanvas.height-35);
+  }
+
+  exportCanvas.toBlob(blob=>saveAs(blob,"heatmap.png"));
 }
 </script>
 </body>
